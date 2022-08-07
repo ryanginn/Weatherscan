@@ -874,19 +874,19 @@
 }
 
 .info-slide-content.severe-almanac .frost-pane.purple .phase.i .icon{
-background-image: url(/images/icons/moonphases/new.png);
+background-image: url(/images/moonphases/new.png);
 }
 .info-slide-content.severe-almanac .frost-pane.purple .phase.ii .icon{
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons/moonphases/half1.png);
+  background-image: url(/images/moonphases/half1.png);
 }
 .info-slide-content.severe-almanac .frost-pane.purple .phase.iii .icon{
-  background-image: url(/images/icons/moonphases/full.png);
+  background-image: url(/images/moonphases/full.png);
 }
 .info-slide-content.severe-almanac .frost-pane.purple .phase.iv .icon{
-  background-image: url(/images/icons/moonphases/half2.png);
+  background-image: url(/images/moonphases/half2.png);
 }
 
 .info-slide-content.severe-almanac .frost-pane.purple .phase .date {
@@ -956,7 +956,6 @@ background-image: url(/images/icons/moonphases/new.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons/26.png);
   position: absolute;
   left: 475px;
   top: 50%;
@@ -1728,19 +1727,19 @@ background-image: url(/images/icons/moonphases/new.png);
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase.i .icon{
-background-image: url(/images/icons/moonphases/new.png);
+background-image: url(/images/moonphases/new.png);
 }
 .info-slide-content.almanac .frost-pane.purple .phase.ii .icon{
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons/moonphases/half1.png);
+  background-image: url(/images/moonphases/half1.png);
 }
 .info-slide-content.almanac .frost-pane.purple .phase.iii .icon{
-  background-image: url(/images/icons/moonphases/full.png);
+  background-image: url(/images/moonphases/full.png);
 }
 .info-slide-content.almanac .frost-pane.purple .phase.iv .icon{
-  background-image: url(/images/icons/moonphases/half2.png);
+  background-image: url(/images/moonphases/half2.png);
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase .date {
@@ -1811,7 +1810,6 @@ background-image: url(/images/icons/moonphases/new.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons/26.png);
   position: absolute;
   left: 475px;
   top: 50%;
@@ -2140,7 +2138,6 @@ background-image: url(/images/icons/moonphases/new.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons/26.png);
   position: fixed;
   left: 510px;
   height: 120px;
@@ -2580,7 +2577,6 @@ flex-direction: row;
   height: 52%;
   position: absolute;
   top: -10px;
-  background-image: url(/images/icons/24.png);
 }
 .info-slide-content.health-forecast .frost-pane.mainforecast .low {
   position: absolute;
@@ -3630,7 +3626,6 @@ flex-direction: row;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons/01.png);
   position: absolute;
   top: 37px
 }
@@ -3751,7 +3746,6 @@ flex-direction: row;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons/01.png);
   position: absolute;
   top: 35px;
   left: -8px;
@@ -3912,7 +3906,6 @@ flex-direction: row;
   width: 100%;
   height: 180px;
   top: -13px;
-  background-image: url(/images/icons/01.png);
 }
 .info-slide-content.gardenindex .frost-pane.left .lowtitle {
   position: absolute;
@@ -4287,7 +4280,6 @@ flex-direction: row;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons2010/28.png);
   position: absolute;
   height: 123px;
   width: 115px;
@@ -4438,7 +4430,6 @@ flex-direction: row;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/icons2010/28.png);
   position: absolute;
   height: 123px;
   width: 115px;
