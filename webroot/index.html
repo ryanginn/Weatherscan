@@ -11,7 +11,10 @@
 
   <link rel="stylesheet" href="js/leaflet/timedimension/leaflet.timedimension.control.min.css"/>
   <link rel="stylesheet" href="css/weatherscan.css"/>
-
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.js'></script>
+  <link href='https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.css' rel='stylesheet' />
 
 </head>
 
@@ -29,8 +32,10 @@
 <script type="text/javascript" src="js/leaflet/timedimension/leaflet.timedimension.min.js"></script>
 
 <script src="/js/date_fns.min.js"></script>
+<script src='http://joeiddon.github.io/perlin/perlin.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js" type="text/javascript"></script>
 
+<script type="text/javascript" src="js/config.js"></script>
 <script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript" src="js/secrets.js"></script>
 <script type="text/javascript" src="js/radar.js"></script>
@@ -41,7 +46,6 @@
 <script type="text/javascript" src="js/slides-loop.js"></script>
 
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/settings.js"></script>
 <script type="text/javascript" src="js/newweathermanager.js"></script>
 <div id="startup" class="settings">
   <div class="blackbar">
@@ -505,12 +509,6 @@
         <div class="info-subheader">
           <span id="subhead-titlei">WEATHER BULLETIN</span><span id="subhead-noaa" style="display:">FROM THE NATIONAL WEATHER SERVICE</span>
         </div>
-        <div class='blue curve left'></div>
-        <div class='blue curve bottom'></div>
-        <div class='yellow curve left'></div>
-        <div class='yellow curve right'></div>
-        <div class='white curve right'></div>
-        <div class='white curve bottom'></div>
         <div class='frost-pane' style="display:None">
           <div class='cityname'>Frankfort Area</div>
           <div id="warningbulletin" class='warnings'>Flash Flood Watch in effect until 4:30 PM EST Tuesday.
@@ -524,20 +522,13 @@
         </div>
 
       </div>
-      <div class="info-slide severe-city-info-slide" style="display:none">
+      <div class="info-slide severe-city-info-slide" style="display: none">
         <div class="info-subheader">
           <span id="subhead-titlei"></span><span id="subhead-city"></span>
         </div>
         <div class="info-subheadershadowfix">
           <span class="subhead-title"></span>
         </div>
-        <div class='blue curve left'></div>
-        <div class='blue curve bottom'></div>
-        <div class='yellow curve left'></div>
-        <div class='yellow curve right'></div>
-        <div class='yellow curve right2'></div>
-        <div class='white curve right'></div>
-        <div class='white curve bottom'></div>
         <div class='noreport' style="display: none">No Report</div>
         <div class='tempunavailable' style="display: none">Temporarily Unavailable</div>
 
@@ -545,6 +536,12 @@
           <div class='frost-pane'>
             <div class='title'></div>
             <div class='content'></div>
+          </div>
+        </div>
+
+        <div class='info-slide-content severe-weatherstatement' style="display: none">
+          <div class='frost-pane'>
+            <div class='statement'>Weatherscan  brings you this special programming because of severe weather in your area.</div>
           </div>
         </div>
 
@@ -564,6 +561,7 @@
           <div class='frost-pane'>
             <div class='hour i'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -575,6 +573,7 @@
             </div>
             <div class='hour ii'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -586,6 +585,7 @@
             </div>
             <div class='hour iii'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -597,6 +597,7 @@
             </div>
             <div class='hour iv'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -609,8 +610,9 @@
           </div>
         </div>
 
-        <div class='info-slide-content severe-extended-forecast' style="display:none">
+        <div class='info-slide-content severe-extended-forecast' style="display: none">
           <div class='thingg'>
+            <div class='thingbg'></div>
             <div class='thingday iw'>Mon</div>
             <div class='thingday iiw'>Tue</div>
             <div class='thingday iiiw'>Wed</div>
@@ -661,8 +663,8 @@
         </div>
 
         <div class='info-slide-content severe-almanac' style="display:none">
+          <div class='thing'><div class='thingbg'></div><div class='thingtext'>Jul 26</div></div>
           <div class='frost-pane half'>
-            <div class='thing'>Jul 26</div>
             <div class='averagetitle'>Average</div>
             <div class='recordtitle'>Record</div>
             <div class='ahigh'>High</div>
@@ -733,7 +735,7 @@
         </div>
 
       </div>
-      <div class="info-slide city-info-slide" style="display: none">
+      <div class="info-slide city-info-slidetest" style="display: none">
         <div class="info-subheader">
           <span id="subhead-titlei"></span><span id="subhead-city"></span>
         </div>
@@ -749,15 +751,7 @@
         <div class='white curve bottom'></div>
         <div class='noreport' style="display: none">No Report</div>
         <div class='tempunavailable' style="display: none">Temporarily Unavailable</div>
-
-        <div class='info-slide-content forecast' style="display:none">
-          <div class='frost-pane'>
-            <div class='title'></div>
-            <div class='content'></div>
-          </div>
-        </div>
-
-        <div class='info-slide-content city-info' style="display:none">
+        <div class='info-slide-content city-info' style="display:">
           <div class='frost-pane left'>
             <div class='labels'></div>
             <div class='data'></div>
@@ -769,10 +763,47 @@
           </div>
         </div>
 
-        <div class='info-slide-content daypart' style="display:none">
+        <div class='info-slide-content forecast' style="display:none">
+          <div class='frost-pane'>
+            <div class='title'></div>
+            <div class='content'></div>
+          </div>
+        </div>
+      </div>
+      <div class="info-slide city-info-slide" style="display: none">
+        <div class="info-subheader">
+          <span id="subhead-titlei"></span><span id="subhead-city"></span>
+        </div>
+        <div class="info-subheadershadowfix">
+          <span class="subhead-title"></span>
+        </div>
+        <div class='noreport' style="display: none">No Report</div>
+        <div class='tempunavailable' style="display: none">Temporarily Unavailable</div>
+
+        <div class='info-slide-content forecast' style="display:none">
+          <div class='frost-pane'>
+            <div class='title'></div>
+            <div class='content'></div>
+          </div>
+        </div>
+
+        <div class='info-slide-content city-info' style="display: none">
+          <div class='frost-pane left'>
+            <div class='labels'></div>
+            <div class='data'></div>
+          </div>
+          <div class='frost-pane right'>
+            <div class='icon'></div>
+            <div class='conditions'></div>
+            <div class='temp'></div>
+          </div>
+        </div>
+
+        <div class='info-slide-content daypart' style="display: none">
           <div class='frost-pane'>
             <div class='hour i'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -784,6 +815,7 @@
             </div>
             <div class='hour ii'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -795,6 +827,7 @@
             </div>
             <div class='hour iii'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -806,6 +839,7 @@
             </div>
             <div class='hour iv'>
               <div class='thing'>
+                <div class='thingbg'></div>
                 <div class='thingtext'>2pm</div>
               </div>
               <div class='icon'></div>
@@ -820,6 +854,7 @@
 
         <div class='info-slide-content extended-forecast' style="display:none">
           <div class='thingg'>
+            <div class='thingbg'></div>
             <div class='thingday iw'>Mon</div>
             <div class='thingday iiw'>Tue</div>
             <div class='thingday iiiw'>Wed</div>
@@ -870,8 +905,8 @@
         </div>
 
         <div class='info-slide-content almanac' style="display:none">
+          <div class='thing'><div class='thingbg'></div><div class='thingtext'>Jul 26</div></div>
           <div class='frost-pane half'>
-            <div class='thing'>Jul 26</div>
             <div class='averagetitle'>Average</div>
             <div class='recordtitle'>Record</div>
             <div class='ahigh'>High</div>
@@ -914,7 +949,7 @@
           </div>
         </div>
 
-        <div class='info-slide-content aroundcityinfo' style="display:none">
+        <div class='info-slide-content aroundcityinfo' style="display: none">
           <div class="frost-pane city i">
             <div class="cityname"></div>
             <div class="temp"></div>
@@ -945,6 +980,7 @@
 
       <!-- DOPPLER RADAR -->
       <div class="info-slide radar-slide" style="display: none">
+        <div class="radar-overlay"></div>
         <div class="info-subheader">
           <span class='subhead-title'>Local Doppler Radar</span>
           <div class="radar-legends">
@@ -954,7 +990,12 @@
         </div>
         <div id="radar-container" class="info-slide-content radar-content" style="">
           <div class='tempunavailable' style="display: none">Temporarily Unavailable</div>
-          <div id="radar-1" class="map"></div>
+          <div class='mapcon'>
+            <div id="radar-1" class="map"></div>
+            <div id="radar-2" class="map"></div>
+            <div id="radar-3" class="map"></div>
+            <div id="satrad-1" class="map"></div>
+          </div>
         </div>
       </div>
 
@@ -1043,7 +1084,35 @@
         <div class='weatherscanmarquee' style="display:none">weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan</div>
         <div class='segment' style="display:none">Ski & Snow</div>
       </div>
-      <div class="info-slide health-slide-intro" style="display: none">
+      <div class="info-slide travel-slide-intro" style="display: none">
+        <div class='accent i curve' style="display:none"></div>
+        <div class='accent ii curve' style="display:none"></div>
+        <div class='accent iii curve' style="display:none"></div>
+        <div class='accent iv curve' style="display:none"></div>
+        <div class='accent v curve' style="display:none"></div>
+        <div class='accent vi curve' style="display:none"></div>
+        <div class='accentviishadow curve'></div>
+        <div class='accentvii curve'></div>
+        <div class='accent viii curve' style="display:none"></div>
+        <div class='accent ix curve' style="display:none"></div>
+        <div class='weatherscanmarquee' style="display:none">weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan</div>
+        <div class='segment' style="display:none">Travel Forecasts</div>
+      </div>
+      <div class="info-slide international-slide-intro" style="display: none">
+        <div class='accent i curve' style="display:none"></div>
+        <div class='accent ii curve' style="display:none"></div>
+        <div class='accent iii curve' style="display:none"></div>
+        <div class='accent iv curve' style="display:none"></div>
+        <div class='accent v curve' style="display:none"></div>
+        <div class='accent vi curve' style="display:none"></div>
+        <div class='accentviishadow curve'></div>
+        <div class='accentvii curve'></div>
+        <div class='accent viii curve' style="display:none"></div>
+        <div class='accent ix curve' style="display:none"></div>
+        <div class='weatherscanmarquee' style="display:none">weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan  weatherscan</div>
+        <div class='segment' style="display:none">International Forecasts</div>
+      </div>
+      <div class="info-slide health-slide-intro" style="display:none">
         <div class='accent i curve' style="display:none"></div>
         <div class='accent ii curve' style="display:none"></div>
         <div class='accent iii curve' style="display:none"></div>
@@ -1065,16 +1134,13 @@
         <div class="info-subheadershadowfix">
           <span class="subhead-title">Current Airport Conditions</span>
         </div>
-        <div class='blue curve left'></div>
-        <div class='blue curve bottom'></div>
-        <div class='yellow curve left'></div>
-        <div class='yellow curve right'></div>
-        <div class='white curve right'></div>
-        <div class='white curve bottom'></div>
         <div class='nodata' style="display: none">Data Not Available</div>
       <div class='info-slide-content airportpanel' style="display: none">
+        <div class='thing'>
+          <div class='thingbg'></div>
+          <div class='thingtext'></div>
+        </div>
       <div class='leftpanel'>
-        <div class='thing'></div>
         <div class='frost-pane top'>
           <div class='title'>Arrivals</div>
           <div class='delay'>DELAY</div>
@@ -1092,7 +1158,6 @@
         </div>
       </div>
       <div class='frost-pane right'>
-        <div class='thing'></div>
         <div class='icon'></div>
         <div class='conditions'></div>
         <div class='temp'></div>
@@ -1100,8 +1165,11 @@
       </div>
       <div class='info-slide-content otherairports' style="display: none">
         <div class='thing'>
-          <span class='temp'>TEMP</span>
-          <span class='delay'>DELAY</span>
+          <div class='thingbg'></div>
+          <div class='thingtext'>
+            <span class='temp'>TEMP</span>
+            <span class='delay'>DELAY</span>
+          </div>
         </div>
         <div class='frost-pane'>
         <div class='source'>Source: FAA</div>
@@ -1141,76 +1209,69 @@
       <div class="info-subheadershadowfix">
         <span class="subhead-title">Current Surf Report</span>
       </div>
-      <div class='blue curve left'></div>
-      <div class='blue curve bottom'></div>
-      <div class='yellow curve left'></div>
-      <div class='yellow curve right'></div>
-      <div class='white curve right'></div>
-      <div class='white curve bottom'></div>
-    <div class='info-slide-content surfreport' style="display:none">
-    <div class='leftpanel'>
-      <div class='thing'>St Augustine Pier</div>
-      <div class='frost-pane'>
+    <div class='info-slide-content surfreport' style="display: none">
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'>St Augustine Pier</div></div>
+      <div class='frost-pane left'>
         <div class='title wind'>Wind</div>
         <div class='title waveperiod'>Wave Period</div>
         <div class='windvalue'>E 10 mph</div>
         <div class='waveperiodvalue'>5 seconds</div>
         <div class='title watertemp'>Surface Water Temperature</div>
-        <div class='watertempbar'>30 40 50 60 70 80 90
+        <div class='watertempbar'><div class='temps'>30 40 50 60 70 80 90</div>
           <div class='temparrow'>
             <div class='temp'>80</div>
           </div>
         </div>
       </div>
-    </div>
-    <div class='frost-pane right'>
-      <div class='thing'></div>
-      <div class='title waveheight'>Average Wave Height</div>
-      <div class='wavebar'>
-        <div class='wavevalue'>5</div>
-        <div class='feet'>feet</div>
+      <div class='frost-pane right'>
+        <div class='title waveheight'>Average Wave Height</div>
+        <div class='wavebar'>
+          <div class='wavevalue'>5</div>
+          <div class='feet'>feet</div>
+        </div>
       </div>
     </div>
-    </div>
     <div class='info-slide-content coastalwaters warnings' style="display:none">
-      <div class='thing'>FROM THE NATIONAL WEATHER SERVICE</div>
-      <div class='frost-pane content'>Small craft should exercise caution until 2 AM EDT
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'>FROM THE NATIONAL WEATHER SERVICE</div></div>
+      <div class='frost-pane content'><div class='warningtext'>Small craft should exercise caution until 2 AM EDT
       <br></br>
-      Small Craft Advisory in effect from 2 AM EDT Monday through Monday evening.</div>
+      Small Craft Advisory in effect from 2 AM EDT Monday through Monday evening.</div></div>
     </div>
-    <div class='info-slide-content coastalwaters forecasts' style="display:none">
-      <div class='thing'>FROM THE NATIONAL WEATHER SERVICE</div>
+    <div class='info-slide-content coastalwaters forecasts' style="display: none">
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'>FROM THE NATIONAL WEATHER SERVICE</div></div>
       <div class='frost-pane content'>
-        <div class='title day'>Rest of Today</div>
-        <div class='forecasttext'>a</div>
+        <div class='title day'>Tonight</div>
+        <div class='forecasttext'>E winds 15 to 20 kt. Seas 3 to 5 ft with occasional seas 6 ft</div>
+        <div class='title day'>Sunday</div>
+        <div class='forecasttext'>E winds 15 to 20 kt. Seas 3 to 5 ft with occasional seas 6 ft</div>
       </div>
 
     </div>
-    <div class='info-slide-content tides' style="display:none">
+    <div class='info-slide-content tides' style="display: none">
       <div class='thingnotpurple'>
         <span class='hightide'>HIGH TIDE</span>
         <span class='lowtide'>LOW TIDE</span>
       </div>
       <div class='frost-pane top'>
-        <div class='place'>St Augustine Beach</div>
+        <div class='place'>Boca Raton, Lake Boca Raton</div>
         <div class='hightide'>
           12:39 am Mon </br>
           12:50 pm Mon
         </div>
         <div class='lowtide'>
-          12:39 am Mon </br>
-          12:50 pm Mon
+          6:44 pm Mon </br>
+          7:14 am Mon
         </div>
       </div>
       <div class='frost-pane mid'>
         <div class='place'>St Augustine Beach</div>
         <div class='hightide'>
-          12:39 am Mon </br>
-          12:50 pm Mon
+          1:38 am Mon </br>
+          1:49 pm Mon
         </div>
         <div class='lowtide'>
-          12:39 am Mon </br>
-          12:50 pm Mon
+          12:7 pm Sun </br>
+          8:04 am Mon
         </div>
       </div>
       <div class='frost-pane bottom'>
@@ -1230,16 +1291,10 @@
     <div class="info-subheadershadowfix">
       <span class="subhead-title">Health Forecast</span>
     </div>
-    <div class='blue curve left'></div>
-    <div class='blue curve bottom'></div>
-    <div class='yellow curve left'></div>
-    <div class='yellow curve right'></div>
-    <div class='white curve right'></div>
-    <div class='white curve bottom'></div>
     <div class='tempunavailable' style="display: none">Temporarily Unavailable</div>
 
     <div class='info-slide-content health-forecast' style="display: none">
-      <div class='thing'>Forecast for Thursday</div>
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'>Forecast for Thursday</div></div>
       <div class='frost-pane mainforecast'>
         <div class='icon'></div>
         <div class='low'>Low</div>
@@ -1258,8 +1313,9 @@
       </div>
     </div>
     <div class='info-slide-content allergy' style="display: none">
+      <div class='leftpanel'>
+        <div class='thing'><div class='thingbg'></div><div class='thingtext'>AS of Aug 7</div></div>
       <div class='frost-pane pollen'>
-        <div class='thing'><span>As of Aug 7</span></div>
         <div class='pollenbar tree'>
           <div class='bar'>
             <div class='bararrow'>
@@ -1290,16 +1346,20 @@
         <div class='scale low'>None</div>
         <div class='scale high'>Very High</div>
       </div>
+    </div>
+    <div class='rightpanel'>
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'>Total <br> Pollen Count</div></div>
       <div class='frost-pane totalpollen'>
-        <div class='thing'><span class='thingtext'>Total <br> Pollen Count</span></div>
         <div class='cat'>9</div>
         <div class='desc'>Low</div>
         <div class='moreinfo' style='display: none'>More allergy<br> information at<br> weather.com/<br>health</div>
       </div>
     </div>
+  </div>
     <div class='info-slide-content Aches-Breath' style="display: none">
-      <div class='thing'>Thursday</div>
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'>Thursday</div></div>
       <div class='frost-pane aches'>
+        <div class='frost-panebg'></div>
         <div class='whitetitle aches'>Aches and Pains Index</div>
         <div class='desc aches'>Potential for feeling aches and pains based on weather conditions.</div>
         <div class='bar'>
@@ -1309,6 +1369,7 @@
         </div>
       </div>
       <div class='frost-pane breath'>
+        <div class='frost-panebg'></div>
         <div class='whitetitle breath'>Respiratory Index</div>
         <div class='desc breath'>Weather's influence on breathing conditions, excluding pollen or<br>‏‏‎ ‎air quality.</div>
         <div class='bar'>
@@ -1318,37 +1379,43 @@
         </div>
       </div>
     </div>
-    <div class='info-slide-content airquality' style="display: None">
-      <div class='frost-pane airforecast'>
-        <div class='thing'><span>Thursday</span></div>
-        <div class='bar'>
-          <div class='bar red' style="background-color:#bc1264"><span class='forecast' style="display:none">Very unhealthy</span></div>
-          <div class='bar deeporange' style="background-color:#ff552a"><span class='forecast' style="display:none">Unhealthy</span></div>
-          <div class='bar orange' style="background-color:#e5a51d"><span class='forecast' style="display:none">Unhealthy for <br>sensitive groups</span></div>
-          <div class='bar yellow' style="background-color:#d9d320"><span class='forecast' style="display:none">Moderate</span></div>
-          <div class='bar green' style="background-color:#3b9f3c"><span class='forecast' style="display:none">Good</span></div>
-          <div class='arrow'></div>
+    <div class='info-slide-content airquality' style="display: none">
+      <div class='leftpanel'>
+        <div class='thing'><div class='thingbg'></div><div class='thingtext'>Thursday</div></div>
+        <div class='frost-pane airforecast'>
+          <div class='bar'>
+            <div class='bar red' style="background-color:#bc1264"><span class='forecast' style="display:none">Very unhealthy</span></div>
+            <div class='bar deeporange' style="background-color:#ff552a"><span class='forecast' style="display:none">Unhealthy</span></div>
+            <div class='bar orange' style="background-color:#e5a51d"><span class='forecast' style="display:none">Unhealthy for <br>sensitive groups</span></div>
+            <div class='bar yellow' style="background-color:#d9d320"><span class='forecast' style="display:none">Moderate</span></div>
+            <div class='bar green' style="background-color:#3b9f3c"><span class='forecast' style="display:none">Good</span></div>
+            <div class='arrow'></div>
+          </div>
         </div>
       </div>
-      <div class='frost-pane primarypolute'>
-        <div class='thing'><span class=pollutetext>Primary<br>Contributing Pollutant</span></div>
-        <div class='pollutant'>Ozone</div>
-        <div class='source'>Source: EPA</div>
-        <div class='ozoneaction' style="display:none">
-          <div class='icon'></div>
-          <div class='ozone'>OZONE</div>
-          <div class='actionday'>Action Day</div>
+      <div class='rightpanel'>
+        <div class='thing'><div class='thingbg'></div><div class='thingtext'>Primary <br>‏‏‎Contributing Pollutant</div></div>
+        <div class='frost-pane primarypolute'>
+          <div class='pollutant'>Ozone</div>
+          <div class='source'>Source: EPA</div>
+          <div class='ozoneaction' style="display: none">
+            <div class='icon' style="display: none"></div>
+            <div class='ozone' style="display: none">OZONE</div>
+            <div class='actionday' style="display: none">Action Day</div>
+          </div>
         </div>
-      </div>
+    </div>
     </div>
     <div class='info-slide-content uvindex' style="display: none">
       <div class='weatherreadyheader'>
+        <div class='weatherreadyheaderbg'></div>
         <div class='icon'></div>
         <div class='weathertext'>W</div>
         <div class='weathertext2'>eather</div>
         <div class='readytext'>READY</div>
       </div>
       <div class='thing'>
+        <div class='thingbg'></div>
         <div class='currentlytext'>Currently</div>
         <div class='uvtime i'>
           <div class='uvtime'>9pm</div>
@@ -1391,6 +1458,7 @@
       </div>
       <div class='info-slide-content healthtip' style="display: none">
         <div class='weatherreadyheader'>
+          <div class='weatherreadyheaderbg'></div>
           <div class='icon'></div>
           <div class='weathertext'>W</div>
           <div class='weathertext2'>eather</div>
@@ -1406,7 +1474,7 @@
           either inside your car or outside.
         </span></div>
       </div>
-      <div class='info-slide-content moreinfoimage' style="display:none">
+      <div class='info-slide-content moreinfoimage' style="display: none">
         <div class='frost-pane image'>
           <div class='moreinfotext'>For more on weather and your health<br>
             tune to The Weather Channel or<br>
@@ -1422,15 +1490,8 @@
     <div class="info-subheadershadowfix">
       <span class="subhead-title">Tee Time Forecast</span>
     </div>
-    <div class='blue curve left'></div>
-    <div class='blue curve bottom'></div>
-    <div class='yellow curve left'></div>
-    <div class='yellow curve right'></div>
-    <div class='yellow curve right2'></div>
-    <div class='white curve right'></div>
-    <div class='white curve bottom'></div>
     <div class='info-slide-content teetime' style="display: none">
-      <div class='thing'></div>
+      <div class='thing'><div class='thingbg'></div></div>
       <div class='frost-pane'>
       <div class='hour i'>
         <div class='hourlabel'>
@@ -1490,7 +1551,7 @@
     </div>
   </div>
   <div class='info-slide-content golfforecast' style="display: none">
-    <div class='thing'></div>
+    <div class='thing'><div class='thingbg'></div><div class='thingtext'></div></div>
     <div class='frost-pane left'>
       <div class='purplefooter'></div>
       <div class=forecontainer>
@@ -1553,15 +1614,8 @@
   <div class="info-subheadershadowfix">
     <span class="subhead-title">Gardening Forecast</span>
   </div>
-  <div class='blue curve left'></div>
-  <div class='blue curve bottom'></div>
-  <div class='yellow curve left'></div>
-  <div class='yellow curve right'></div>
-  <div class='yellow curve right2'></div>
-  <div class='white curve right'></div>
-  <div class='white curve bottom'></div>
   <div class='info-slide-content gardenindex' style="display: none">
-    <div class='thing'>Monday</div>
+    <div class='thing'><div class='thingbg'></div><div class='thingtext'>Monday</div></div>
     <div class='frost-pane left'>
       <div class='forecastcontainer'>
       <div class='icon'></div>
@@ -1609,47 +1663,171 @@
   <div class="info-subheadershadowfix">
     <span class="subhead-title">Ski Report</span>
   </div>
-  <div class='blue curve left'></div>
-  <div class='blue curve bottom'></div>
-  <div class='yellow curve left'></div>
-  <div class='yellow curve right'></div>
-  <div class='yellow curve right2'></div>
-  <div class='white curve right'></div>
-  <div class='white curve bottom'></div>
   <div class='info-slide-content skireport' style="display: none">
     <div class='skilocation i'>
-      <div class='thing'><span class='displaynname'></span><span class='trails'></span></div>
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'><span class='displaynname'>Waterville Valley</span><span class='trails'>47 Trails</span></div></div>
       <div class='frost-pane'>
-        <div class='newsnowtitle'></div>
-        <div class='basesnowtitle'></div>
-        <div class='newsnowvalue'></div>
-        <div class='basesnowvalue'></div>
-        <div class='snowconditionn'></div>
+        <div class='newsnow title'>NEW SNOW</div>
+        <div class='basesnow title'>BASE SNOW</div>
+        <div class='newsnowv value'>6'</div>
+        <div class='basesnowv value'>16 - 30'</div>
+        <div class='snowcondition'>Spring</div>
       </div>
     </div>
-    <div class='skilocation iii'>
-      <div class='thing'><span class='displaynname'></span><span class='trails'></span></div>
+    <div class='skilocation ii'>
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'><span class='displaynname'>Waterville Valley</span><span class='trails'>47 Trails</span></div></div>
       <div class='frost-pane'>
-        <div class='newsnowtitle'></div>
-        <div class='basesnowtitle'></div>
-        <div class='newsnowvalue'></div>
-        <div class='basesnowvalue'></div>
-        <div class='snowconditionn'></div>
+        <div class='newsnow title'>NEW SNOW</div>
+        <div class='basesnow title'>BASE SNOW</div>
+        <div class='newsnowv value'>6'</div>
+        <div class='basesnowv value'>16 - 30'</div>
+        <div class='snowcondition'>Spring</div>
       </div>
     </div>
-    <div class='skilocation iii'>
-      <div class='thing'><span class='displaynname'></span><span class='trails'></span></div>
+    <div class='skilocation i'>
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'><span class='displaynname'>Waterville Valley</span><span class='trails'>47 Trails</span></div></div>
       <div class='frost-pane'>
-        <div class='newsnowtitle'></div>
-        <div class='basesnowtitle'></div>
-        <div class='newsnowvalue'></div>
-        <div class='basesnowvalue'></div>
-        <div class='snowconditionn'></div>
+        <div class='newsnow title'>NEW SNOW</div>
+        <div class='basesnow title'>BASE SNOW</div>
+        <div class='newsnowv value'>6'</div>
+        <div class='basesnowv value'>16 - 30'</div>
+        <div class='snowcondition'>Spring</div>
       </div>
     </div>
   </div>
 
 </div>
+<div class="info-slide travel" style="display: none">
+  <div class="info-subheader">
+    <span id="subhead-titlei"></span><span id="subhead-city"></span>
+  </div>
+  <div class="info-subheadershadowfix">
+    <span class="subhead-title">Destination Forecasts</span>
+  </div>
+  <div class='info-slide-content destinationforecast' style="display: ">
+    <div class='thing'><div class='thingbg'></div><div class='thingtext'><span class='daytitle i'>SUN</span><span class='daytitle ii'>MON</span><span class='daytitle iii'>TUE</span></div></div>
+    <div class='frost-pane toploc'>
+      <div class='cityname'>New York</div>
+      <div class='day i'>
+        <div class='icon'></div>
+        <div class='hightemp'>50</div>
+        <div class='lowtemp'>38</div>
+      </div>
+      <div class='day ii'>
+        <div class='icon'></div>
+        <div class='hightemp'>50</div>
+        <div class='lowtemp'>37</div>
+      </div>
+      <div class='day iii'>
+        <div class='icon'></div>
+        <div class='hightemp'>60</div>
+        <div class='lowtemp'>46</div>
+      </div>
+    </div>
+    <div class='frost-pane midloc'>
+      <div class='cityname'>Chicago</div>
+      <div class='day i'>
+        <div class='icon'></div>
+        <div class='hightemp'>50</div>
+        <div class='lowtemp'>38</div>
+      </div>
+      <div class='day ii'>
+        <div class='icon'></div>
+        <div class='hightemp'>50</div>
+        <div class='lowtemp'>37</div>
+      </div>
+      <div class='day iii'>
+        <div class='icon'></div>
+        <div class='hightemp'>60</div>
+        <div class='lowtemp'>46</div>
+      </div>
+    </div>
+    <div class='frost-pane botloc'>
+      <div class='cityname'>Los Angeles</div>
+      <div class='day i'>
+        <div class='icon'></div>
+        <div class='hightemp'>50</div>
+        <div class='lowtemp'>38</div>
+      </div>
+      <div class='day ii'>
+        <div class='icon'></div>
+        <div class='hightemp'>50</div>
+        <div class='lowtemp'>37</div>
+      </div>
+      <div class='day iii'>
+        <div class='icon'></div>
+        <div class='hightemp'>60</div>
+        <div class='lowtemp'>46</div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="info-slide international" style="display: none">
+    <div class="info-subheader">
+      <span id="subhead-titlei"></span><span id="subhead-city"></span>
+    </div>
+    <div class="info-subheadershadowfix">
+      <span class="subhead-title">International Forecasts</span>
+    </div>
+    <div class='info-slide-content internationalforecast' style="display: none">
+      <div class='thing'><div class='thingbg'></div><div class='thingtext'><span class='daytitle i'>SUN</span><span class='daytitle ii'>MON</span><span class='daytitle iii'>TUE</span></div></div>
+      <div class='frost-pane toploc'>
+        <div class='cityname'>Madrid</div>
+        <div class='day i'>
+          <div class='icon'></div>
+          <div class='hightemp'>50</div>
+          <div class='lowtemp'>38</div>
+        </div>
+        <div class='day ii'>
+          <div class='icon'></div>
+          <div class='hightemp'>50</div>
+          <div class='lowtemp'>37</div>
+        </div>
+        <div class='day iii'>
+          <div class='icon'></div>
+          <div class='hightemp'>60</div>
+          <div class='lowtemp'>46</div>
+        </div>
+      </div>
+      <div class='frost-pane midloc'>
+        <div class='cityname'>Tokyo</div>
+        <div class='day i'>
+          <div class='icon'></div>
+          <div class='hightemp'>50</div>
+          <div class='lowtemp'>38</div>
+        </div>
+        <div class='day ii'>
+          <div class='icon'></div>
+          <div class='hightemp'>50</div>
+          <div class='lowtemp'>37</div>
+        </div>
+        <div class='day iii'>
+          <div class='icon'></div>
+          <div class='hightemp'>60</div>
+          <div class='lowtemp'>46</div>
+        </div>
+      </div>
+      <div class='frost-pane botloc'>
+        <div class='cityname'>Mexico City</div>
+        <div class='day i'>
+          <div class='icon'></div>
+          <div class='hightemp'>50</div>
+          <div class='lowtemp'>38</div>
+        </div>
+        <div class='day ii'>
+          <div class='icon'></div>
+          <div class='hightemp'>50</div>
+          <div class='lowtemp'>37</div>
+        </div>
+        <div class='day iii'>
+          <div class='icon'></div>
+          <div class='hightemp'>60</div>
+          <div class='lowtemp'>46</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
     </div>
   </div>
 
@@ -1679,7 +1857,11 @@
     <div class="gradient3"></div>
   </div>
   <div id="minimap-title"><span>PAST 3 HOURS</span></div>
-  <div id="minimap"></div>
+  <div id="minimap">
+    <div id="minimap-1" class="map"></div>
+    <div id="minimap-2" class="map"></div>
+    <div id="minimap-3" class="map"></div>
+  </div>
   <div id="logo-area"><img src="images/midco_logo_shadow.png"/></div>
 
   <div id="forecast-shadow">

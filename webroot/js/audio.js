@@ -11,8 +11,18 @@ function WeatherAudio() {
 		$('body').append($players);
 
 		// start the music
-		buildMusicArray(musicarr);
-		shuffle(musicarr);
+		if (audioSettings.enableMusic == true) {
+			buildMusicArray(musicarr);
+		}
+		if (audioSettings.randomStart == true) {
+			var firsthalfmusicarr = musicarr
+			var secondhalfmusicarr = firsthalfmusicarr.splice(Math.floor(Math.random()*firsthalfmusicarr.length))
+			musicarr = [...secondhalfmusicarr,...firsthalfmusicarr]
+		};
+		if (audioSettings.shuffle == true) {
+			shuffle(musicarr);
+		};
+		console.log(musicarr);
 
 		startPlaying(musicarr, true);
 
@@ -21,8 +31,22 @@ function WeatherAudio() {
 			var musicpath = "music/";
 
 			// insert track names
-			for (var i = 32; i<66; i++) {
-				arr.push(musicpath + "Track " + String('0'+i).slice(-2) + '.mp3');
+			for (var i = 0; i < audioSettings.order.length; i++) {
+				if (audioSettings.order[i]<34) {
+					arr.push(musicpath + "Weatherscan Track " + String(audioSettings.order[i]) + '.mp3');
+				} else if (audioSettings.order[i] < 46) {
+					arr.push(musicpath + "2003 Weatherscan Track " + String(audioSettings.order[i]-33) + '.mp3');
+				} else if (audioSettings.order[i] < 51) {
+					arr.push(musicpath + "2006 Weatherscan Track " + String(audioSettings.order[i]-45) + '.mp3');
+				} else if (audioSettings.order[i] < 55) {
+					arr.push(musicpath + "Removed Weatherscan Track " + String(audioSettings.order[i]-50) + '.mp3');
+				} else if (audioSettings.order[i] < 68) {
+					arr.push(musicpath + "Trammel Starks 1 Track " + String(audioSettings.order[i]-54)+ '.mp3');
+				}	else if (audioSettings.order[i] < 78) {
+					arr.push(musicpath + "Trammel Starks 2 Track " + String(audioSettings.order[i]-67) + '.mp3');
+				} else if (audioSettings.order[i] < 84) {
+					arr.push(musicpath + "Trammel Starks 2 Track " + String(audioSettings.order[i]-77) + '.mp3');
+				}
 			}
 
 		}
@@ -184,6 +208,18 @@ function WeatherAudio() {
 	this.playLocalforecastii = function() {
 		startPlaying(['/localvocals/narrations/Your_local_forecast_2.mp3'], false);
 	}
+	this.severeWarning = function() {
+		startPlaying(['/localvocals/narrations/TSTORM_DEFAULT.wav'], false);
+	}
+
+	this.tornadoWarning = function() {
+		startPlaying(['/localvocals/narrations/TORNADO_DEFAULT.wav'], false);
+	}
+
+	this.flashFloodWarning = function() {
+		startPlaying(['/localvocals/narrations/FFLOOD_DEFAULT.wav'], false);
+	}
+
 
 
 

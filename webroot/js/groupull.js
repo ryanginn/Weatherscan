@@ -26,11 +26,22 @@ function MarqueeMan() {
 			$('.marqueeheadersevere').fadeIn(0) //#868686
 			$('#marqueeSevere').text(weatherInfo.bulletin.severewarnings[sidx].warningdesc)
 			weatherAudio.playwarningbeep()
+			setTimeout(function()
+			{
+				if (weatherInfo.bulletin.severewarnings[sidx].warningname == "SEVERE THUNDERSTORM WARNING") {
+					weatherAudio.severeWarning()
+				} else if (weatherInfo.bulletin.severewarnings[sidx].warningname == "TORNADO WARNING") {
+					weatherAudio.tornadoWarning()
+				} else if (weatherInfo.bulletin.severewarnings[sidx].warningname == "FLASH FLOOD WARNING") {
+					weatherAudio.flashFloodWarning()
+				}
+			},3500)
+			//weatherAudio.severeWarning()
 			$('#marqueeSevere')
 				.marquee('destroy')
 				.marquee({speed: 170, delayBeforeStart: 1000, pauseOnHover: true, pauseOnCycle: true})
 				.on('finished', function(){
-					switchToWarningMarquee(((sidx < weatherInfo.bulletin.severewarnings.length) ? sidx + 1 : 0))
+					switchToWarningMarquee(((sidx < weatherInfo.bulletin.severewarnings.length -1) ? sidx + 1 : 0))
 				})
 		} else if (weatherInfo.bulletin.marqueewarnings.length != 0){
 			if (weatherInfo.bulletin.severeweathermode == true) {
@@ -62,6 +73,8 @@ function MarqueeMan() {
 			$('#marqueeSevere').text(weatherInfo.bulletin.marqueewarnings[0].desc)
 			$('#marqueeSevere')
 				.marquee({speed: 170, delayBeforeStart: 1000, pauseOnHover: true, pauseOnCycle: true})
+				.on('finished', function(){	if (weatherInfo.bulletin.severeweathermode == true) {weatherAudio.playwarningbeep()}})
+
 		} else {
 			$('#marqueeSevere')
 				.marquee('destroy')

@@ -5,7 +5,7 @@
     "cors": "node ./webroot/js/cors.js",
     "http-server": "http-server ./webroot",
     "dev-server": "live-server ./webroot",
-    "start": "npm-run-all --parallel cors http-server"
+    "start": "npm-run-all --parallel cors dev-server"
   },
   "repository": {
     "type": "git",
