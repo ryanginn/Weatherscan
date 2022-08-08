@@ -1438,6 +1438,31 @@ var mainMap
 				}
 				,healthtip() {
 					$('.info-slide.health .subhead-title').text('Weather Safety Tips');
+					const d = new Date();
+					let month = d.getMonth();
+					if (month > 4 && month < 8) {
+						$('.summertip').show();
+					} else if (month == 0) {
+						$('.flutip').show();
+					} else if (month == 1) {
+						$('.pipetip2').show();
+					} else if (month == 2) {
+						$('.wintertip2').show();
+					} else if (month == 3) {
+						$('.allergytip2').show();
+					} else if (month == 4) {
+						$('.drivingtip2').show();
+					} else if (month == 8) {
+						$('.drivingtip').show();
+					} else if (month == 9) {
+						$('.allergytip').show();
+					} else if (month == 10) {
+						$('.drivingtip').show();
+					} else if (month == 11) {
+						$('.flutip2').show();
+					} else {
+						$('.wintertip').show();
+					}
 					$('.info-slide-content.healthtip').fadeIn(500);
 					setTimeout(function() {
 						$('.info-slide-content.healthtip').fadeOut(500).promise().done(function(){
@@ -1903,6 +1928,19 @@ var mainMap
 							$('.info-slide-content.almanac .frost-pane.half .rlowyear').text(weatherInfo.alamanac.reclowyear);
 							$('.info-slide-content.almanac .frost-pane.purple .sunrisetext').text(weatherInfo.alamanac.sunrise);
 							$('.info-slide-content.almanac .frost-pane.purple .sunsettext').text(weatherInfo.alamanac.sunset);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.i .phasetext').text(weatherInfo.alamanac.moonphases[0].name);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.ii .phasetext').text(weatherInfo.alamanac.moonphases[1].name);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.iii .phasetext').text(weatherInfo.alamanac.moonphases[2].name);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.iv .phasetext').text(weatherInfo.alamanac.moonphases[3].name);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.i .date').text(weatherInfo.alamanac.moonphases[0].date);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.ii .date').text(weatherInfo.alamanac.moonphases[1].date);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.iii .date').text(weatherInfo.alamanac.moonphases[2].date);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.iv .date').text(weatherInfo.alamanac.moonphases[3].date);
+							$('.info-slide-content.almanac .frost-pane.purple .phase.i .icon').css('background-image', 'url("images/moonphases/' + weatherInfo.alamanac.moonphases[0].name + '.png")');
+							$('.info-slide-content.almanac .frost-pane.purple .phase.ii .icon').css('background-image', 'url("images/moonphases/' + weatherInfo.alamanac.moonphases[1].name + '.png")');
+							$('.info-slide-content.almanac .frost-pane.purple .phase.iii .icon').css('background-image', 'url("images/moonphases/' + weatherInfo.alamanac.moonphases[2].name + '.png")');
+							$('.info-slide-content.almanac .frost-pane.purple .phase.iv .icon').css('background-image', 'url("images/moonphases/' + weatherInfo.alamanac.moonphases[3].name + '.png")');
+
 							$('.city-info-slide').fadeIn(0);
 							$('.city-info-slide .subhead-title').text('Almanac');
 							$('.city-info-slide #subhead-city').text(weatherInfo.alamanac.displayname);

@@ -1727,19 +1727,19 @@ background-image: url(/images/moonphases/new.png);
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase.i .icon{
-background-image: url(/images/moonphases/new.png);
+background-image: url(/images/moonphases/NEW.png);
 }
 .info-slide-content.almanac .frost-pane.purple .phase.ii .icon{
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  background-image: url(/images/moonphases/half1.png);
+  background-image: url(/images/moonphases/FIRST.png);
 }
 .info-slide-content.almanac .frost-pane.purple .phase.iii .icon{
-  background-image: url(/images/moonphases/full.png);
+  background-image: url(/images/moonphases/FULL.png);
 }
 .info-slide-content.almanac .frost-pane.purple .phase.iv .icon{
-  background-image: url(/images/moonphases/half2.png);
+  background-image: url(/images/moonphases/LAST.png);
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase .date {

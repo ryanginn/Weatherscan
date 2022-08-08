@@ -973,6 +973,33 @@ function grabAlamanacSlidesData() {
       weatherInfo.alamanac.displayname = maincitycoords.displayname
       weatherInfo.alamanac.noReport = true
     });
+    var phasesfound = 0;
+    $.getJSON(`https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format(new Date(),"M")}&year=${dateFns.format(new Date(),"YYYY")}`, function(data) {
+      console.log('test')
+      for (phase in data.phase) {
+        console.log(phasesfound)
+        if (data.phase[phase].isPhaseLimit && phasesfound < 4 && phase > parseInt(dateFns.format(new Date(),"D"))) {
+          weatherInfo.alamanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
+          weatherInfo.alamanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
+          phasesfound += 1;
+        }
+      }
+      if (phasesfound < 4) {
+        nextMonth()
+      }
+    })
+    function nextMonth() {
+      $.getJSON(`https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format((dateFns.addMonths(new Date(),1)),"M")}&year=${dateFns.format(dateFns.addMonths(new Date(),1),"YYYY")}`, function(data) {
+        for (phase in data.phase) {
+          if (data.phase[phase].isPhaseLimit && phasesfound < 4) {
+            console.log(phasesfound)
+            weatherInfo.alamanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
+            weatherInfo.alamanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
+            phasesfound += 1;
+          }
+        }
+      })
+    }
 }
 function grabHealthData() {
   $.getJSON('https://api.weather.com/v3/wx/forecast/daily/5day?geocode='+ maincitycoords.lat + ',' + maincitycoords.lon +"&format=json&language=en-US&units=e&apiKey=" + api_key, function(data) {
@@ -1115,7 +1142,7 @@ function grabAirportDelayData() {
           airportdelay.iata = airportevent.airportId
           airportdelay.type = 'Arrival'
           airportdelay.amount = formatMinutes(airportevent.arrivalDelay.averageDelay)
-          airportdelay.amountmin = airportevent.departureDelay.averageDelay
+          airportdelay.amountmin = airportevent.arrivalDelay.averageDelay
           airportdelay.reason = airportevent.arrivalDelay.reason
           weatherInfo.airport.delays.push(airportdelay)
         }
