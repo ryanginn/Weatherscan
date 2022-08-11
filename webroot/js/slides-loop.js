@@ -433,7 +433,7 @@ var mainMap
 									//fadeout
 									setTimeout(function() {
 										$('.info-slide-content.severe-extended-forecast').fadeOut(500).promise().done(function(){
-												$('.city-info-slide').fadeOut(0);
+												$('.severe-city-info-slide').fadeOut(0);
 											wait(0)
 										});
 									}, slideDelay);
@@ -1440,32 +1440,33 @@ var mainMap
 					$('.info-slide.health .subhead-title').text('Weather Safety Tips');
 					const d = new Date();
 					let month = d.getMonth();
-					if (month > 4 && month < 8) {
-						$('.summertip').show();
-					} else if (month == 0) {
-						$('.flutip').show();
-					} else if (month == 1) {
-						$('.pipetip2').show();
-					} else if (month == 2) {
-						$('.wintertip2').show();
-					} else if (month == 3) {
-						$('.allergytip2').show();
-					} else if (month == 4) {
-						$('.drivingtip2').show();
-					} else if (month == 8) {
-						$('.drivingtip').show();
-					} else if (month == 9) {
-						$('.allergytip').show();
-					} else if (month == 10) {
-						$('.drivingtip').show();
-					} else if (month == 11) {
-						$('.flutip2').show();
+					const summertips = ["summertip","preparednessplantip","severeweathertip","severeweathertip2","severeweathertip3","drivingtip","drivingtip2","allergytip","allergytip2"]
+					const wintertips = ["wintertip","wintertip2","preparednessplantip","winterdrivingtip","winterdrivingtip2","pettip","pettip2","pettip3","pipetip","pipetip2","pipetip3","flutip","flutip2","firetip","firetip2","sunscreenwintertip","sunscreenwintertip2","shovelingtip","allergytip","allergytip2"]
+					var tipidx = 0;
+
+					if (month > 2 && month < 9) {
+						$('.' + summertips[tipidx]).show();
+						if (tipidx > summertips.length) {
+							tipidx = 0
+						} else {
+							tipidx += 1;
+						}
 					} else {
-						$('.wintertip').show();
+						$('.' + summertips[tipidx]).show();
+						if (tipidx > wintertips.length) {
+							tipidx = 0
+						} else {
+							tipidx += 1;
+						}
 					}
 					$('.info-slide-content.healthtip').fadeIn(500);
 					setTimeout(function() {
 						$('.info-slide-content.healthtip').fadeOut(500).promise().done(function(){
+							if (month > 2 && month < 9) {
+								$('.' + summertips[tipidx-1]).hide();
+							} else {
+								$('.' + summertips[tipidx-1]).hide();
+							}
 							wait(0);
 						});
 					}, slideDelay);

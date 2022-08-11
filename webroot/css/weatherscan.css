@@ -64,7 +64,7 @@
 }
 @font-face {
   font-family: Frutiger;
-  src: url(/fonts/newfonts/Frutiger_bold.woff) format("woff");
+  src: url(/fonts/newfonts/Frutiger_Bold.woff) format("woff");
   font-weight: bold;
   font-style: normal
 }
@@ -5240,6 +5240,7 @@ label{
   -webkit-mask-image: url(/images/airport-curve.svg);
   mask-image: url(/images/airport-curve.svg);
   -webkit-mask-size:200% 200%;
+  mask-size:200% 200%;
   -webkit-mask-position: 0% 100%;
   mask-position: 0% 100%;
   mask-repeat: no-repeat;

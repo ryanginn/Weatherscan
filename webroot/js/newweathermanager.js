@@ -1182,6 +1182,7 @@ function grabAirportData() {
   mairporturl += '&language=en-US&units=e&format=json&apiKey='+ api_key
   //{displayname:"New York / LaGaurdia",iata:"LGA",delay:"No Delay",temp:""}
   $.getJSON(mairporturl, function(data) {
+    weatherInfo.ccticker.ccairportdelays = []
     data.forEach((airport, i) => {
       var marqueedelay = {iato:"",type:"",amount:"",amountmin:0,reason:""};
       var airportdepartdelay = {iato:"",type:"",amount:"",amountmin:0,reason:""};
