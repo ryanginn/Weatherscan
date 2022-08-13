@@ -166,8 +166,8 @@ function Loops() {
 						$('#forecast-shadow').css('box-shadow','0 3px 10px 0 rgba(0, 0, 0, .35)')
 						$('#forecast-text').fadeIn(0)
 						$('#forecast-title').fadeIn(0)
-						$('#forecast-title').text(weatherInfo.dayDesc.lowerbar.day[0].name + "'S" + " FORECAST");
 						resizeText(weatherInfo.dayDesc.lowerbar.day[0].desc);
+						$('#forecast-title').text(weatherInfo.dayDesc.lowerbar.day[0].name + "'S" + " FORECAST");
 					}
 				},
 				text2() {
@@ -185,8 +185,8 @@ function Loops() {
 						$('#forecast-shadow').css('box-shadow','0 3px 10px 0 rgba(0, 0, 0, .35)')
 						$('#forecast-text').fadeIn(0)
 						$('#forecast-title').fadeIn(0)
-						$('#forecast-title').text(weatherInfo.dayDesc.lowerbar.day[1].name + "'S" + " FORECAST");
 						resizeText(weatherInfo.dayDesc.lowerbar.day[1].desc);
+						$('#forecast-title').text(weatherInfo.dayDesc.lowerbar.day[1].name + "'S" + " FORECAST");
 					}
 				},
 
@@ -301,12 +301,14 @@ function Loops() {
 
 	function resizeText(text){
 		var s = 41,
-		$test = $('<div style="position:absolute;top:100%;"></div>') .appendTo('#forecast-text') .css('font-size', s + 'px') .html(text);
-		$test.width($('#forecast-text').width() );
+		$test = $('<div style="position:absolute;padding:0 .75% 0 11.5%;top:100%;font-family:Interstate"></div>') .appendTo('#forecast-text') .css('font-size', s + 'px') .html(text);
+		$test.css('width',$('#forecast-text').width());
 		//setTimeout(function() {
-			while ($test.outerHeight(true) >= ($('#forecast-text').height()) ) {
+		i = 0
+			while ($test.height() >= ($('#forecast-text').height()) && i < 10 ) {
 				s -= 1;
 				$test.css('font-size', s + 'px');
+				i += 1
 			}
 			$('#forecast-text div') .text(text) .css('font-size', s + 'px');
 			$test.remove();

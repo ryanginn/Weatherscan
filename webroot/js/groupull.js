@@ -5,13 +5,18 @@ $(function(){
 	weatherAudio.playCallback = function(tags) {
 		$('.track-info').text('playing "' + tags.title + '" by ' + tags.artist);
 	}
-	$('#marquee2').text(weatherInfo.ad)
 	setTimeout(function() {
-		$('#marquee2').marquee({
-			speed: 170, pauseOnHover: true
-		});
+		switchMarquee2(0)
 	}, 100)
 });
+function switchMarquee2(idx) {
+	$('#marquee2')
+		.marquee('destroy')
+	$('#marquee2').text(apperanceSettings.marqueeAd[idx])
+	$('#marquee2')
+		.marquee({speed: 170, pauseOnHover: true})
+		.on('finished', function() {switchMarquee2(((idx < apperanceSettings.marqueeAd.length) ? ++idx : 0))});
+}
 function MarqueeMan() {
 	function switchToWarningMarquee(sidx) {
 		if (weatherInfo.bulletin.severewarnings.length != 0) {

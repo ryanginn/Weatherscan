@@ -45,7 +45,7 @@ function WeatherAudio() {
 				}	else if (audioSettings.order[i] < 78) {
 					arr.push(musicpath + "Trammel Starks 2 Track " + String(audioSettings.order[i]-67) + '.mp3');
 				} else if (audioSettings.order[i] < 84) {
-					arr.push(musicpath + "Trammel Starks 2 Track " + String(audioSettings.order[i]-77) + '.mp3');
+					arr.push(musicpath + "Trammel Starks 3 Track " + String(audioSettings.order[i]-77) + '.mp3');
 				}
 			}
 
@@ -168,6 +168,7 @@ function WeatherAudio() {
 			$(document).mousedown( function() {
 				if (!mobilePlaying) {
 					$player.jPlayer("play");
+					$player.jPlayer("playHead", 100);
 					mobilePlaying = true;
 				}
 			});
@@ -192,7 +193,7 @@ function WeatherAudio() {
 
 	// plays the vocal current conditions announcement
 	this.playCurrentConditions = function () {
-		startPlaying(['/localvocals/narrations/Your_current_conditions.mp3'], false);
+		startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Your_current_conditions.mp3'], false);
 	}
 	this.playwarningbeep = function () {
 		startPlaying(['/localvocals/narrations/warningbeep.wav'], false);
@@ -200,13 +201,13 @@ function WeatherAudio() {
 
 
 	this.playLocalRadar = function() {
-		startPlaying(['/localvocals/narrations/The_local_Doppler_radar.mp3'], false);
+		startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/The_local_Doppler_radar.mp3'], false);
 	}
 	this.playLocalforecasti = function() {
-		startPlaying(['/localvocals/narrations/Your_local_forecast_1.mp3'], false);
+		startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Your_local_forecast_1.mp3'], false);
 	}
 	this.playLocalforecastii = function() {
-		startPlaying(['/localvocals/narrations/Your_local_forecast_2.mp3'], false);
+		startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Your_local_forecast_2.mp3'], false);
 	}
 	this.severeWarning = function() {
 		startPlaying(['/localvocals/narrations/TSTORM_DEFAULT.wav'], false);
