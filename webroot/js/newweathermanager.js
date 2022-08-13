@@ -48,6 +48,9 @@ function applyApperanceSettings() {
   } else {
     $('.city-info-slide').css({'background': `transparent url(/images/newbg/core_${apperanceSettings.corebackgroud}_bg.png) no-repeat`, 'background-position': '69% 41.5%', 'background-size': '120.3% 150.9%'})
   }
+  if (apperanceSettings.logoURL) {
+    $('#logo-area img').attr("src",apperanceSettings.logoURL)
+  }
 
 }
 

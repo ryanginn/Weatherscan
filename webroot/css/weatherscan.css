@@ -6355,8 +6355,8 @@ label{
 
 #logo-area {
   position: absolute;
-  width: 31.528%;
-  height: 9.398%;
+  width: 452px;
+  height: 95px;
   left: 0;
   top: 83.4%
 }
@@ -6364,9 +6364,9 @@ label{
 #logo-area img {
   display: block;
   position: absolute;
-  width: 65%;
-  top: 19%;
-  right: 5%
+  width: 100%;
+  top: 0%;
+  right: 0%
 }
 
 #arrow-img {
