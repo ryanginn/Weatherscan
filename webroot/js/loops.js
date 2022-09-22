@@ -55,7 +55,8 @@ function Loops() {
 			$('#current-noreport').fadeOut(0)
 			$('#conditions-icon').fadeIn(0)
 			$('#current-temp').text( weatherInfo.currentCond.sidebar.temp ) ;
-			$('#conditions-icon').css('background-image', 'url("' + getCCicon(+weatherInfo.currentCond.sidebar.icon, weatherInfo.currentCond.sidebar.windspeed) + '")');
+			//$('#conditions-icon').css('background-image', 'url("' + getCCicon(+weatherInfo.currentCond.sidebar.icon, weatherInfo.currentCond.sidebar.windspeed) + '")');
+			getCCicon('#conditions-icon', weatherInfo.currentCond.sidebar.icon, weatherInfo.currentCond.sidebar.windspeed)
 		}
 	}
 
@@ -214,10 +215,11 @@ function Loops() {
 
 						$("<div class='header'></div>") .appendTo(newtile) .text(weatherInfo.fiveDay.lowerbar.day[i].name);
 
-						icons = getCCicon(+weatherInfo.fiveDay.lowerbar.day[i].icon, weatherInfo.fiveDay.lowerbar.day[i].windspeed);
+						//icons = getCCicon(+weatherInfo.fiveDay.lowerbar.day[i].icon, weatherInfo.fiveDay.lowerbar.day[i].windspeed);
 
-							$("<img class='icon' src=''/>") .appendTo(newtile) .attr('src', icons);
-
+							var icon = $("<div class='icon'></div>")
+							getCCicon(icon, weatherInfo.fiveDay.lowerbar.day[i].icon, weatherInfo.fiveDay.lowerbar.day[i].windspeed)
+							icon.appendTo(newtile)
 
 						$("<div class='high'></div>") .appendTo(newtile) .text(weatherInfo.fiveDay.lowerbar.day[i].high);
 						$("<div class='low'></div>")  .appendTo(newtile) .text(weatherInfo.fiveDay.lowerbar.day[i].low);
@@ -249,14 +251,13 @@ function Loops() {
 					$('.forecast-tiles').empty();
 
 					for (var i = 0; i < 4; i++) {
-
 						newtile = $("<div class='forecast-tile hourly'></div>");
 						sizer   = $("<div class='width-sizer'></div>").appendTo(newtile);
 
-						icons = getCCicon(weatherInfo.dayPart.lowerbar.hour[i].icon, weatherInfo.dayPart.lowerbar.hour[i].windspeed);
-							$("<img class='icon' src=''/>") .appendTo(sizer) .attr('src', icons);
-
-
+						//icons = getCCicon(weatherInfo.dayPart.lowerbar.hour[i].icon, weatherInfo.dayPart.lowerbar.hour[i].windspeed);
+							var icon = $("<div class='icon'></div>")
+							getCCicon(icon, weatherInfo.dayPart.lowerbar.hour[i].icon, weatherInfo.dayPart.lowerbar.hour[i].windspeed)
+							icon.appendTo(sizer)
 						$("<div class='footer'></div>") .append("<span>" + weatherInfo.dayPart.lowerbar.hour[i].time + "</span>") .appendTo(newtile)
 						highbar = $("<div class='hourly-high'></div>") .appendTo(sizer);
 

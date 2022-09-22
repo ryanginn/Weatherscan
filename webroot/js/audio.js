@@ -195,11 +195,6 @@ function WeatherAudio() {
 	this.playCurrentConditions = function () {
 		startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Your_current_conditions.mp3'], false);
 	}
-	this.playwarningbeep = function () {
-		startPlaying(['/localvocals/narrations/warningbeep.wav'], false);
-	}
-
-
 	this.playLocalRadar = function() {
 		startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/The_local_Doppler_radar.mp3'], false);
 	}
@@ -209,14 +204,37 @@ function WeatherAudio() {
 	this.playLocalforecastii = function() {
 		startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Your_local_forecast_2.mp3'], false);
 	}
+	this.playPollenReport = function() {
+		if (audioSettings.narrationType == 'female') {
+			startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Pollen_report.mp3'], false);
+		}
+	}
+	this.playTrafficFlow = function() {
+		if (audioSettings.narrationType == 'female') {
+			startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Traffic_flow.mp3'], false);
+		}
+	}
+	this.playRegionalforecast = function() {
+		if (audioSettings.narrationType == 'female') {
+			startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Regional_forecast.mp3'], false);
+		}
+	}
+	this.playAirportDelays = function() {
+		if (audioSettings.narrationType == 'female') {
+			startPlaying(['/localvocals/narrations/'+audioSettings.narrationType+'/Local_airport_delays.mp3'], false);
+		}
+	}
+
+	this.playwarningbeep = function () {
+		startPlaying(['/localvocals/narrations/warningbeep.wav'], false);
+	}
+
 	this.severeWarning = function() {
 		startPlaying(['/localvocals/narrations/TSTORM_DEFAULT.wav'], false);
 	}
-
 	this.tornadoWarning = function() {
 		startPlaying(['/localvocals/narrations/TORNADO_DEFAULT.wav'], false);
 	}
-
 	this.flashFloodWarning = function() {
 		startPlaying(['/localvocals/narrations/FFLOOD_DEFAULT.wav'], false);
 	}

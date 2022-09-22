@@ -74,7 +74,7 @@ locList = [], citySlideList = [], state, ccTickerCitiesList = [];
 
 
   //If there is a location inputted, use that.
-
+//$.getJSON("http://"+document.location.hostname+":8081/https://services.surfline.com/forecasts/wave?spotId=500927576a2e4300134fbed8", function() {});
 queryString = window.location.search;
 
 function getMainLoc(configFailed) {
@@ -89,7 +89,7 @@ function getMainLoc(configFailed) {
       state = data.location.adminDistrict[0];
       //init data
       getStatePopularCities(state, true)
-      grabAlamanacSlidesData()
+      grabalmanacSlidesData()
       grabHealthData()
       grabSideandLowerBarData()
     });
@@ -105,7 +105,7 @@ function getMainLoc(configFailed) {
         state = data.location.adminDistrict[cidx];
 
         getStatePopularCities(state, true)
-        grabAlamanacSlidesData()
+        grabalmanacSlidesData()
         grabHealthData()
         grabSideandLowerBarData()
       });
@@ -121,7 +121,7 @@ function getMainLoc(configFailed) {
           state = data.location.adminDistrict[cidx];
 
           getStatePopularCities(state, true)
-          grabAlamanacSlidesData()
+          grabalmanacSlidesData()
           grabHealthData()
           grabSideandLowerBarData()
       });
@@ -138,7 +138,7 @@ function getMainLoc(configFailed) {
       state = data.regionName
       //init data
       getStatePopularCities(state, true)
-      grabAlamanacSlidesData()
+      grabalmanacSlidesData()
       grabHealthData()
       grabSideandLowerBarData()
     });
@@ -334,7 +334,7 @@ var weatherInfo = { currentCond: {
       {name:"",cond:"",icon:"",high:"",low:"",windspeed:""}
     ]},*/
     weatherLocs:[]
-  }, alamanac: {noReport:false,displayname:"",date:"",avghigh:"",avglow:"",rechigh:"",reclow:"",rechighyear:"",reclowyear:"",sunrise:"",sunset:"",moonphases:[
+  }, almanac: {noReport:false,displayname:"",date:"",avghigh:"",avglow:"",rechigh:"",reclow:"",rechighyear:"",reclowyear:"",sunrise:"",sunset:"",moonphases:[
     {name:"NEW",date:"Feb 10"},
     {name:"FIRST",date:"Feb 16"},
     {name:"FULL",date:"Feb 21"},
@@ -366,7 +366,7 @@ var weatherInfo = { currentCond: {
   ], delays: [],
     //{iato:"",type:"",amount:"",amountmin:"",reason:""}
    otherairports:[
-    {displayname:"New York / LaGaurdia",iata:"LGA",delay:"No Delay",temp:"",icon:"",windspeed:""},
+    {displayname:"New York / LaGuardia",iata:"LGA",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Chicago O'hare Int'l",iata:"ORD",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Los Angeles Int'l",iata:"LAX",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Atlanta International",iata:"LAX",delay:"No Delay",temp:"",icon:"",windspeed:""},
@@ -939,6 +939,8 @@ function grabSideandLowerBarData() {
                   });
                 };
                 pushSevereAlert(0)
+              } else {
+                weatherInfo.bulletin.severeweathermode = false;
               }
     };
   }
@@ -953,27 +955,27 @@ function grabSideandLowerBarData() {
     weatherInfo.fiveDay.lowerbar.noReport = true
   });
 }
-function grabAlamanacSlidesData() {
+function grabalmanacSlidesData() {
   url = 'https://api.weather.com/v3/aggcommon/v3-wx-almanac-daily-1day;v3-wx-observations-current?geocode=' + maincitycoords.lat + ',' + maincitycoords.lon + "&format=json&language=en-US&units=e" + "&day=" + dateFns.format(new Date(), "D") + "&month=" + dateFns.format(new Date(),"M") + "&apiKey=" + api_key
     $.getJSON(url, function(data) {
       if (data == null) {
-        weatherInfo.alamanac.displayname = maincitycoords.displayname
-        weatherInfo.alamanac.noReport = true
+        weatherInfo.almanac.displayname = maincitycoords.displayname
+        weatherInfo.almanac.noReport = true
       } else {
-        weatherInfo.alamanac.displayname = maincitycoords.displayname
-        weatherInfo.alamanac.date = dateFns.format(new Date(),"MMMM D")
-        weatherInfo.alamanac.avghigh = data["v3-wx-almanac-daily-1day"].temperatureAverageMax[0]
-        weatherInfo.alamanac.avglow = data["v3-wx-almanac-daily-1day"].temperatureAverageMin[0]
-        weatherInfo.alamanac.rechigh = data["v3-wx-almanac-daily-1day"].temperatureRecordMax[0]
-        weatherInfo.alamanac.reclow = data["v3-wx-almanac-daily-1day"].temperatureRecordMin[0]
-        weatherInfo.alamanac.rechighyear = data["v3-wx-almanac-daily-1day"].almanacRecordYearMax[0]
-        weatherInfo.alamanac.reclowyear = data["v3-wx-almanac-daily-1day"].almanacRecordYearMin[0]
-        weatherInfo.alamanac.sunset = dateFns.format(new Date(data["v3-wx-observations-current"].sunsetTimeLocal),"h:mm a")
-        weatherInfo.alamanac.sunrise = dateFns.format(new Date(data["v3-wx-observations-current"].sunriseTimeLocal),"h:mm a")
+        weatherInfo.almanac.displayname = maincitycoords.displayname
+        weatherInfo.almanac.date = dateFns.format(new Date(),"MMMM D")
+        weatherInfo.almanac.avghigh = data["v3-wx-almanac-daily-1day"].temperatureAverageMax[0]
+        weatherInfo.almanac.avglow = data["v3-wx-almanac-daily-1day"].temperatureAverageMin[0]
+        weatherInfo.almanac.rechigh = data["v3-wx-almanac-daily-1day"].temperatureRecordMax[0]
+        weatherInfo.almanac.reclow = data["v3-wx-almanac-daily-1day"].temperatureRecordMin[0]
+        weatherInfo.almanac.rechighyear = data["v3-wx-almanac-daily-1day"].almanacRecordYearMax[0]
+        weatherInfo.almanac.reclowyear = data["v3-wx-almanac-daily-1day"].almanacRecordYearMin[0]
+        weatherInfo.almanac.sunset = dateFns.format(new Date(data["v3-wx-observations-current"].sunsetTimeLocal),"h:mm a")
+        weatherInfo.almanac.sunrise = dateFns.format(new Date(data["v3-wx-observations-current"].sunriseTimeLocal),"h:mm a")
       }
     }).fail(function() {
-      weatherInfo.alamanac.displayname = maincitycoords.displayname
-      weatherInfo.alamanac.noReport = true
+      weatherInfo.almanac.displayname = maincitycoords.displayname
+      weatherInfo.almanac.noReport = true
     });
     var phasesfound = 0;
     $.getJSON(`https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format(new Date(),"M")}&year=${dateFns.format(new Date(),"YYYY")}`, function(data) {
@@ -981,8 +983,8 @@ function grabAlamanacSlidesData() {
       for (phase in data.phase) {
         console.log(phasesfound)
         if (data.phase[phase].isPhaseLimit && phasesfound < 4 && phase > parseInt(dateFns.format(new Date(),"D"))) {
-          weatherInfo.alamanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
-          weatherInfo.alamanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
+          weatherInfo.almanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
+          weatherInfo.almanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
           phasesfound += 1;
         }
       }
@@ -995,8 +997,8 @@ function grabAlamanacSlidesData() {
         for (phase in data.phase) {
           if (data.phase[phase].isPhaseLimit && phasesfound < 4) {
             console.log(phasesfound)
-            weatherInfo.alamanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
-            weatherInfo.alamanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
+            weatherInfo.almanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
+            weatherInfo.almanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
             phasesfound += 1;
           }
         }

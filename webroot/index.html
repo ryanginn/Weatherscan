@@ -17,10 +17,7 @@
   <link href='https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.css' rel='stylesheet' />
 
 </head>
-
-
 <body>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="js/jplayer/jquery.jplayer.min.js"></script>
@@ -492,12 +489,20 @@
 
 <div id="main" class="container">
 
-  <img id="template" src="images/template-4k.png"/>
+  <img id="template" src="images/template-4k2005.png"/>
   <div id="info-slides-bg"></div>
     <div id="info-slides-container">
 
-    <div id="info-slides-header">
+    <div id="slides-header" class="info-slides-header">
       <div class="hscroller"></div><!--<span class="city radar current">LOCAL RADAR</span> -->
+      <div class="gradientthing"></div>
+    </div>
+    <div id="severe-header" class="info-slides-header" style="display:none;">
+      <div class="hscroller"></div><!--<span class="city radar current">LOCAL RADAR</span> -->
+      <div class="gradientthing"></div>
+    </div>
+    <div id="severe-header-weathermessage" class="info-slides-header" style="display:none;">
+      <div class="hscroller">SEVERE WEATHER UPDATE</div><!--<span class="city radar current">LOCAL RADAR</span> -->
       <div class="gradientthing"></div>
     </div>
 
@@ -1926,7 +1931,7 @@
   <div class="info-subheadershadowfix">
     <span class="subhead-title">Destination Forecasts</span>
   </div>
-  <div class='info-slide-content destinationforecast' style="display: ">
+  <div class='info-slide-content destinationforecast' style="display: none">
     <div class='thing'><div class='thingbg'></div><div class='thingtext'><span class='daytitle i'>SUN</span><span class='daytitle ii'>MON</span><span class='daytitle iii'>TUE</span></div></div>
     <div class='frost-pane toploc'>
       <div class='cityname'>New York</div>

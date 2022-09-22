@@ -127,17 +127,19 @@ let pointsOnMapCircle = function(latitude, longitude, distance, numPoints) {
 
 
 // maps current condition code to icon
-function getCCicon(ccCode, windData){
-	var icon = `images/icons${apperanceSettings.iconSet}/` + ( "0" +  {"0":0,"1":0,"2":0,"3":47,"4":01,"5":02,"6":38,"7":03,"8":04,"9":05,"10":06,"11":08,"12":08,"13":09,"14":12,"15":11,"16":12,"17":48,"18":48,"19":16,"20":49,"21":16,"22":14,"23":0,"24":50,"25":34,"26":20,"27":21,"28":22,"29":23,"30":24,"31":25,"32":26,"33":27,"34":28,"35":13,"36":41,"37":29,"38":29,"39":30,"40":31,"41":32,"42":33,"43":34,"44":19,"45":35,"46":36,"47":37}[ccCode]).slice(-2) + ".png";
+function getCCicon(imgDiv,ccCode, windData){
+	var icon = {"0":19,"1":19,"2":19,"3":19,"4":19,"5":28,"6":30,"7":29,"8":32,"9":12,"10":33,"11":12,"12":12,"13":23,"14":24,"15":37,"16":24,"17":31,"18":31,"19":11,"20":10,"21":11,"22":11,"23":9,"24":9,"25":35,"26":0,"27":5,"28":1,"29":6,"30":2,"31":8,"32":4,"33":7,"34":3,"35":30,"36":4,"37":20,"38":20,"39":15,"40":14,"41":26,"42":25,"43":37,"44":38,"45":16,"46":27,"47":21}[ccCode]
 	if (parseInt(windData) >= 20) {
-		if (icon === `images/icons${apperanceSettings.iconSet}/12.png` || icon ===  `images/icons${apperanceSettings.iconSet}/10.png` || icon ===  `images/icons${apperanceSettings.iconSet}/09.png`) {
-			icon = `images/icons${apperanceSettings.iconSet}/34.png`
-		} else if (icon === `images/icons${apperanceSettings.iconSet}/31.png` || icon === `images/icons${apperanceSettings.iconSet}/08.png` || icon === `images/icons/07.png`) {
-			icon = `images/icons${apperanceSettings.iconSet}/45.png`
+		if (icon === 12 || icon ===  13 || icon === 14) {
+			icon = 34
+		} else if (icon === 23 || icon === 24 || icon === 25) {
+			icon = 35
 		}
 	}
-	return icon
+	$(imgDiv).css('background-image', `url("/images/icons${apperanceSettings.iconSet}sprite.png`)
+	$(imgDiv).css('background-position-x', `${(100/37)*icon}%`)
 }
+
 function getWarningPosition(warning) {
 var warnpos = { "Tsunami Warning":	1,
 "Tornado Warning":	2,

@@ -22,6 +22,7 @@ function initBasemaps() {
 					'tiles': [
 						//'http://127.0.0.1/cgi-bin/qgis_mapserv.fcgi.exe?map=E:/desktop/mecratorproject/mapprojectforlater.qgz&BBOX={bbox-epsg-3857}&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:3857&WIDTH=512&HEIGHT=512&LAYERS=USA_modified&format=image/png'
 						'https://api.mapbox.com/styles/v1/goldbblazez/cl6jfozbb001h15sdx9ze69f7/tiles/{z}/{x}/{y}?access_token=' + map_key
+						//'./test/{z}/{x}/{y}.png'
 					],
 					'tileSize': 512
 					},
@@ -707,6 +708,7 @@ function initBasemaps() {
 				'tiles': [
 					//'http://127.0.0.1/cgi-bin/qgis_mapserv.fcgi.exe?map=E:/desktop/lambertproject/lambertmapforlatera.qgz&BBOX={bbox-epsg-3857}&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:3857&WIDTH=512&HEIGHT=512&LAYERS=Lambertmap_modified&format=image/png'
 					'https://api.mapbox.com/styles/v1/goldbblazez/cl6jfozbb001h15sdx9ze69f7/tiles/{z}/{x}/{y}?access_token=' + map_key
+					//'./lamberttest3/{z}/{x}/{y}.png'
 				],
 				'tileSize': 512
 			});
@@ -736,8 +738,11 @@ function initBasemaps() {
 					'tiles': [
 						'https://api.mapbox.com/styles/v1/goldbblazez/cl6jfozbb001h15sdx9ze69f7/tiles/{z}/{x}/{y}?access_token=' + map_key
 						//'http://127.0.0.1/cgi-bin/qgis_mapserv.fcgi.exe?map=E:/desktop/mecratorproject/mapprojectforlater.qgz&BBOX={bbox-epsg-3857}&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&CRS=EPSG:3857&WIDTH=512&HEIGHT=512&LAYERS=USA_modified&format=image/png'
+						//'./test/{z}/{x}/{y}.png'
 					],
-					'tileSize': 512
+					'tileSize': 512,
+					'minzoom': 6,
+					'maxzoom': 8,
 					},
 				},
 				'layers': [
@@ -763,7 +768,7 @@ function initBasemaps() {
 				'raster-tiles': {
 				'type': 'raster',
 				'tiles': [
-				'https://api.weather.com/v3/TileServer/tile/radar?ts=1648291200&xyz={x}:{y}:{z}&apiKey=' + api_key
+				'https://api.weather.com/v3/TileServer/tile/twcRadarMosaic?ts=1648291200&xyz={x}:{y}:{z}&apiKey=' + api_key
 				],
 				'tileSize': 256,
 				}
@@ -1226,10 +1231,10 @@ function loadRadarImages(divID) {
 			})
 		}
 	if (divID != 'satrad-1') {
-	fetch("https://api.weather.com/v3/TileServer/series/productSet/PPAcore?filter=radar&apiKey=" + api_key)
+	fetch("https://api.weather.com/v3/TileServer/series/productSet/PPAcore?filter=twcRadarMosaic&apiKey=" + api_key)
     .then(timestampsobj => timestampsobj.json())
     .then(data => {
-			sortedtimestampsforfetch = data.seriesInfo.radar.series.sort(function(a,b) {
+			sortedtimestampsforfetch = data.seriesInfo.twcRadarMosaic.series.sort(function(a,b) {
 				return a.ts - b.ts;
 			})
 			if (divID == 'radar-1') {sortedtimestamps = sortedtimestampsforfetch} else if (divID == 'minimap') {sortedtimestampsmini = sortedtimestampsforfetch};
@@ -1240,7 +1245,7 @@ function loadRadarImages(divID) {
           source: {
             type: "raster",
             tiles: [
-							`https://api.weather.com/v3/TileServer/tile/radar?ts=${timestamp.ts}&xyz={x}:{y}:{z}&apiKey=` + api_key
+							`https://api.weather.com/v3/TileServer/tile/twcRadarMosaic?ts=${timestamp.ts}&xyz={x}:{y}:{z}&apiKey=` + api_key
             ],
             tileSize: 512
           },
@@ -1255,7 +1260,7 @@ function loadRadarImages(divID) {
           source: {
             type: "raster",
             tiles: [
-							`https://api.weather.com/v3/TileServer/tile/radar?ts=${timestamp.ts}&xyz={x}:{y}:{z}&apiKey=` + api_key
+							`https://api.weather.com/v3/TileServer/tile/twcRadarMosaic?ts=${timestamp.ts}&xyz={x}:{y}:{z}&apiKey=` + api_key
             ],
             tileSize: 512
           },
