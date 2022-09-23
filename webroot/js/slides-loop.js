@@ -4,9 +4,6 @@ headings:
 RADAR < MAIN CITY < CITY 1 < CITY 2
 */
 var buildHeaderGlobal;
-var slideLoopOrder = [];
-var header = '#slides-header', severepreload = false
-
 
 var maindiv = {
 	"localDoppler":".radar-slide",
@@ -166,7 +163,7 @@ var mainMap
 		var radarSlideDuration = 60000,
 			slideDelay = 10000;
 						// for later
-		var selectval = 0;
+		var header = '#slides-header', severepreload = false, tipidx = 0;
 
 		buildHeader();
 		setTimeout(function() {
@@ -492,8 +489,7 @@ var mainMap
 				weatherAudio.playLocalforecastii();
 				//fade in
 				$('.info-slide-content.daypart').fadeIn(500);
-				//for calculating when to show daypart
-				selectval = selectval + 1
+
 				//fadeout
 				setTimeout(function() {
 					$('.info-slide-content.daypart').fadeOut(500).promise().done(function(){
@@ -543,8 +539,6 @@ var mainMap
 								});
 							} else {
 								$('.info-slide-content.forecast').fadeOut(500).promise().done(function(){
-									selectval = selectval + 1
-									if (selectval === 4) {selectval = 0}
 									wait(0);
 								});
 							}
@@ -888,7 +882,6 @@ var mainMap
 				let month = d.getMonth();
 				const summertips = ["summertip","preparednessplantip","severeweathertip","severeweathertip2","severeweathertip3","drivingtip","drivingtip2","allergytip","allergytip2"]
 				const wintertips = ["wintertip","wintertip2","preparednessplantip","winterdrivingtip","winterdrivingtip2","pettip","pettip2","pettip3","pipetip","pipetip2","pipetip3","flutip","flutip2","firetip","firetip2","sunscreenwintertip","sunscreenwintertip2","shovelingtip","allergytip","allergytip2"]
-				var tipidx = 0;
 
 				if (month > 2 && month < 9) {
 					$('.' + summertips[tipidx]).show();
@@ -1398,8 +1391,7 @@ var mainMap
 					weatherAudio.playLocalforecastii();
 					//fade in
 					$('.info-slide-content.severe-daypart').fadeIn(500);
-					//for calculating when to show daypart
-					selectval = selectval + 1
+
 					//fadeout
 					setTimeout(function() {
 						$('.info-slide-content.severe-daypart').fadeOut(500).promise().done(function(){
@@ -1447,8 +1439,7 @@ var mainMap
 								});
 							} else {
 								$('.info-slide-content.severe-forecast').fadeOut(500).promise().done(function(){
-									selectval = selectval + 1
-									if (selectval === 4) {selectval = 0}
+
 									wait(0);
 								});
 							}
