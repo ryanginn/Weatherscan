@@ -1765,7 +1765,7 @@ var mainMap
 				$scroller = $(header + ' .hscroller'),
 				left = 0;
 			//reload cityslide data from newweathermanager on loop complete
-			if ($cities[1].classList.contains('loopcomplete')) {
+			if ($cities[moveHeaderVal].dataset.loopComplete) {
 				grabCitySlidesData()
 				grabHealthData()
 				grabCity8SlidesData()
