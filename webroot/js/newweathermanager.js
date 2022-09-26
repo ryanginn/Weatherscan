@@ -482,11 +482,11 @@ grabInternationalData()
 
 function grabCitySlidesData() {
   console.log("grabbed city data")
-  weatherInfo.currentCond.weatherLocs = [];
+  /*weatherInfo.currentCond.weatherLocs = [];
   weatherInfo.dayPart.weatherLocs = [];
   weatherInfo.dayDesc.weatherLocs = [];
   weatherInfo.fiveDay.weatherLocs = [];
-  weatherInfo.bulletin.weatherLocs = [];
+  weatherInfo.bulletin.weatherLocs = [];*/
   var url = "https://api.weather.com/v3/aggcommon/v3alertsHeadlines;v3-wx-forecast-daily-5day;v3-wx-observations-current;v3-wx-forecast-hourly-2day?geocodes="
   url += `${maincitycoords.lat},${maincitycoords.lon};`
   locList.forEach((loc, i) => {
@@ -498,15 +498,15 @@ function grabCitySlidesData() {
     data.forEach((ajaxedLoc, i) => {
         //Extra locations
         if (ajaxedLoc == null) {
-          weatherInfo.currentCond.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),temp:"",cond:"",icon:"",humid:"",dewpt:"",pressure:"",pressureTrend:"",wind:"",windspeed:"",gust:"",feelslike:{type:"",val:""}})
-          weatherInfo.dayPart.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]});
-          weatherInfo.dayDesc.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",desc:""},{name:"",desc:""},{name:"",desc:""},{name:"",desc:""}]})
-          weatherInfo.fiveDay.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""}]});
-          weatherInfo.bulletin.weatherLocs.push({displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),pages:[],enabled: false});
+          weatherInfo.currentCond.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),temp:"",cond:"",icon:"",humid:"",dewpt:"",pressure:"",pressureTrend:"",wind:"",windspeed:"",gust:"",feelslike:{type:"",val:""}}
+          weatherInfo.dayPart.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]}
+          weatherInfo.dayDesc.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",desc:""},{name:"",desc:""},{name:"",desc:""},{name:"",desc:""}]}
+          weatherInfo.fiveDay.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""}]}
+          weatherInfo.bulletin.weatherLocs[i] = {displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),pages:[],enabled: false}
         } else {
           var weatherLocscc = {noReport:false,displayname:"",temp:"",cond:"",icon:"",humid:"",dewpt:"",pressure:"",pressureTrend:"",wind:"",windspeed:"",gust:"",feelslike:{type:"",val:""}}
           if (ajaxedLoc["v3-wx-observations-current"] == null) {
-            weatherInfo.currentCond.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),temp:"",cond:"",icon:"",humid:"",dewpt:"",pressure:"",pressureTrend:"",wind:"",windspeed:"",gust:"",feelslike:{type:"",val:""}})
+            weatherInfo.currentCond.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),temp:"",cond:"",icon:"",humid:"",dewpt:"",pressure:"",pressureTrend:"",wind:"",windspeed:"",gust:"",feelslike:{type:"",val:""}}
           } else {
             weatherLocscc.temp = ajaxedLoc["v3-wx-observations-current"].temperature
             weatherLocscc.cond = ajaxedLoc["v3-wx-observations-current"].wxPhraseLong
@@ -521,12 +521,12 @@ function grabCitySlidesData() {
             weatherLocscc.feelslike.type = ((ajaxedLoc["v3-wx-observations-current"].temperature != ajaxedLoc["v3-wx-observations-current"].temperatureHeatIndex) ? "Heat Index" : ((ajaxedLoc["v3-wx-observations-current"].temperatureWindChill != ajaxedLoc["v3-wx-observations-current"].temperature) ? "Wind Chill" : "dontdisplay"))
             weatherLocscc.feelslike.val = ajaxedLoc["v3-wx-observations-current"].temperatureFeelsLike
             weatherLocscc.displayname = ((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname)
-            weatherInfo.currentCond.weatherLocs.push(weatherLocscc)
+            weatherInfo.currentCond.weatherLocs[i] = weatherLocscc
           }
           //day part
           if (ajaxedLoc["v3-wx-forecast-hourly-2day"] == null) {
-            weatherInfo.dayPart.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]});
-            weatherInfo.fiveDay.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""}]});
+            weatherInfo.dayPart.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]}
+            weatherInfo.fiveDay.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""}]}
           } else {
             //functions converting hourly data into daypart
             var indexes = calcHourlyReport(ajaxedLoc["v3-wx-forecast-hourly-2day"]);
@@ -617,11 +617,11 @@ function grabCitySlidesData() {
               weatherLocsDP.hour[hi].windspeed= ajaxedLoc["v3-wx-forecast-hourly-2day"].windSpeed[indexes[hi]]
             }
             weatherLocsDP.displayname = ((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname)
-            weatherInfo.dayPart.weatherLocs.push(weatherLocsDP)
+            weatherInfo.dayPart.weatherLocs[i] = weatherLocsDP
           }
           //daydesc
           if (ajaxedLoc["v3-wx-forecast-daily-5day"] == null) {
-            weatherInfo.dayPart.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]});
+            weatherInfo.dayPart.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]}
           } else {
             var weatherLocsDD = {noReport:false,displayname:"",day:[{name:"",desc:""},{name:"",desc:""},{name:"",desc:""},{name:"",desc:""}]}
             var daycorrection = 0;
@@ -633,7 +633,7 @@ function grabCitySlidesData() {
               weatherLocsDD.day[hi - daycorrection].desc = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].narrative[hi] + ((ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].qualifierPhrase[hi] != null && ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].narrative[hi].includes(ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].qualifierPhrase[hi]) === false) ? ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].qualifierPhrase[hi] : '') + ((ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windPhrase[hi - daycorrection] != null && ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].narrative[hi].includes(ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windPhrase[hi]) === false) ? ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windPhrase[hi] : '')
             }
             weatherLocsDD.displayname = ((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname)
-            weatherInfo.dayDesc.weatherLocs.push(weatherLocsDD)
+            weatherInfo.dayDesc.weatherLocs[i] = weatherLocsDD
             //fiveday
             var weatherLocsFD = {noReport:false,displayname:"",day:[{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""}]};
             for (var hi = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 1 : 0, hidp = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 2 : 0; hi < 5 + daycorrection; hi++, hidp = hidp + 2) {
@@ -645,7 +645,7 @@ function grabCitySlidesData() {
               weatherLocsFD.day[hi - daycorrection].low = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMin[hi]
             }
             weatherLocsFD.displayname = ((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname)
-            weatherInfo.fiveDay.weatherLocs.push(weatherLocsFD)
+            weatherInfo.fiveDay.weatherLocs[i] = weatherLocsFD
           }
           //bulletin
           var weatherLocsWA = {displayname:"",pages:[],enabled: false};
@@ -709,20 +709,19 @@ function grabCitySlidesData() {
             }
             splitLines()
             weatherLocsWA.enabled = true
-            weatherInfo.bulletin.weatherLocs.push(weatherLocsWA)
+            weatherInfo.bulletin.weatherLocs[i] = weatherLocsWA
           }
-        } else {weatherInfo.bulletin.weatherLocs.push(weatherLocsWA)}
+        } else {weatherInfo.bulletin.weatherLocs[i] = weatherLocsWA}
       }
     });
   }).fail(function() {
     for (var i = 0; i < (locList.length+1); i++) {
-      weatherInfo.currentCond.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),temp:"",cond:"",icon:"",humid:"",dewpt:"",pressure:"",pressureTrend:"",wind:"",windspeed:"",gust:"",feelslike:{type:"",val:""}})
-      weatherInfo.dayPart.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]});
-      weatherInfo.dayDesc.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",desc:""},{name:"",desc:""},{name:"",desc:""},{name:"",desc:""}]})
-      weatherInfo.fiveDay.weatherLocs.push({noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""}]});
-      weatherInfo.bulletin.weatherLocs.push({displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),pages:[],enabled: false});
+      weatherInfo.currentCond.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),temp:"",cond:"",icon:"",humid:"",dewpt:"",pressure:"",pressureTrend:"",wind:"",windspeed:"",gust:"",feelslike:{type:"",val:""}}
+      weatherInfo.dayPart.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),daytitle:"",hour:[{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},{time:"",cond:"",icon:"",temp:"",wind:"",windspeed:""},]};
+      weatherInfo.dayDesc.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",desc:""},{name:"",desc:""},{name:"",desc:""},{name:"",desc:""}]}
+      weatherInfo.fiveDay.weatherLocs[i] = {noReport:true,displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),day:[{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""},{name:"",cond:"",icon:"",high:"",low:"",windspeed:""}]};
+      weatherInfo.bulletin.weatherLocs[i] = {displayname:((i ==0 ) ? maincitycoords.displayname : locList[i-1].displayname),pages:[],enabled: false};
     }
-
   })
 }
 

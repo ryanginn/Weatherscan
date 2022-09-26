@@ -1541,7 +1541,7 @@ var mainMap
 					}, slideDelay);
 				}
 			}
-		}, start = new Date(),
+		},
 		divTest = $(header + ' .city.current')[0],
 		keys = JSON.parse(divTest.dataset.slideorder),
 		moveHeader = 0
@@ -1646,8 +1646,6 @@ var mainMap
 			}
 		}
 		grabPreloadDiv()
-		console.log(idx)
-		console.log(preloadIdx)
 		//set up variables
 		currentDisplay = displays[keys[idx].name];
 		//if slide is preloaded, load it, if not preloaded the info-slide is the same.
@@ -1678,7 +1676,6 @@ var mainMap
 			keys[idx] = keys[idx].originalSlide
 			divTest.dataset.slideorder = JSON.stringify(keys)
 		}
-		console.log(new Date() - start)
 		currentDisplay();
 		return;
 
@@ -1765,7 +1762,7 @@ var mainMap
 				$scroller = $(header + ' .hscroller'),
 				left = 0;
 			//reload cityslide data from newweathermanager on loop complete
-			if ($cities[moveHeaderVal].dataset.loopComplete) {
+			if ($cities[moveHeaderVal].dataset.loopcomplete) {
 				grabCitySlidesData()
 				grabHealthData()
 				grabCity8SlidesData()
@@ -1811,17 +1808,17 @@ var mainMap
 		var city, first, dname
 
 			var li = 1
-		function grabDiv(divTypeVal, locIdxVal, slideVal, repeatVal, slideDelayVal, slideOrderVal) {
+		function grabDiv(divTypeVal, locIdxVal, slideVal, repeatVal, slideDelayVal, slideOrderVal, loopComplete) {
 			var divType = {
-				"severe-cities":'<span class="city severe" data-slide="severe" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>` + ((locIdxVal == 0) ? maincitycoords.displayname : locList[locIdxVal-1].displayname)+ '</span>',
-				"cities":'<span class="city" data-slide="city" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>` + ((locIdxVal == 0) ? maincitycoords.displayname : locList[locIdxVal-1].displayname)+ '</span>',
-				"radar":'<span class="city radar" data-slide="radar" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>LOCAL RADAR</span>`,
-				"golf":'<span class="city golf" data-slide="golf" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>GOLF</span>`,
-				"beach":'<span class="city beach" data-slide="beach" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>BOAT & BEACH</span>`,
-				"health":'<span class="city healthh" data-slide="healthh" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>HEALTH</span>`,
-				"airport":'<span class="city airport" data-slide="airport" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>AIRPORTS</span>`,
-				"travel":'<span class="city travell" data-slide="travell" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>TRAVEL</span>`,
-				"international":'<span class="city internationall" data-slide="internationall" data-divOrder="'+slideVal+'" data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>INTERNATIONAL</span>`,
+				"severe-cities":'<span class="city severe" data-slide="severe" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>` + ((locIdxVal == 0) ? maincitycoords.displayname : locList[locIdxVal-1].displayname)+ '</span>',
+				"cities":'<span class="city" data-slide="city" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>` + ((locIdxVal == 0) ? maincitycoords.displayname : locList[locIdxVal-1].displayname)+ '</span>',
+				"radar":'<span class="city radar" data-slide="radar" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>LOCAL RADAR</span>`,
+				"golf":'<span class="city golf" data-slide="golf" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>GOLF</span>`,
+				"beach":'<span class="city beach" data-slide="beach" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>BOAT & BEACH</span>`,
+				"health":'<span class="city healthh" data-slide="healthh" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>HEALTH</span>`,
+				"airport":'<span class="city airport" data-slide="airport" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>AIRPORTS</span>`,
+				"travel":'<span class="city travell" data-slide="travell" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>TRAVEL</span>`,
+				"international":'<span class="city internationall" data-slide="internationall" data-divOrder="'+slideVal+ ((loopComplete == true) ? '" data-loopComplete="true"':'"')+' data-locIdx="'+locIdxVal+'" data-repeat="'+repeatVal+'" data-slideDelay="'+slideDelayVal+'"' + `data-slideOrder='${slideOrderVal}'>INTERNATIONAL</span>`,
 			}
 			return divType[divTypeVal];
 		}
@@ -1838,7 +1835,7 @@ var mainMap
 					locIdxOrder.push(i)
 				}
 			} else {
-				$('#slides-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(slideLoopSettings.order[slide].type, slideLoopSettings.order[slide].locidx, totalSlides, slideLoopSettings.order[slide].repeat, slideLoopSettings.order[slide].slideDelay, (JSON.stringify(slideLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx', slideLoopSettings.order[slide].locidx)));
+				$('#slides-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(slideLoopSettings.order[slide].type, slideLoopSettings.order[slide].locidx, totalSlides, slideLoopSettings.order[slide].repeat, slideLoopSettings.order[slide].slideDelay, (JSON.stringify(slideLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx', slideLoopSettings.order[slide].locidx), slideLoopSettings.order[slide].loopComplete));
 				totalSlides += 1
 				continue
 			}
@@ -1846,7 +1843,7 @@ var mainMap
 			if (slideLoopSettings.order[slide].locidx.includes('random')) shuffle(locIdxOrder);
 			console.log(locIdxOrder)
 			for (var loc = 0; loc < locIdxOrder.length; loc++) {
-				$('#slides-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(slideLoopSettings.order[slide].type, locIdxOrder[loc], totalSlides, ((slideLoopSettings.order[slide].repeat.length) ? slideLoopSettings.order[slide].repeat[loc % slideLoopSettings.order[slide].repeat.length] : slideLoopSettings.order[slide].repeat), ((slideLoopSettings.order[slide].slideDelay.length) ? slideLoopSettings.order[slide].slideDelay[loc % slideLoopSettings.order[slide].slideDelay.length] : slideLoopSettings.order[slide].slideDelay), ((slideLoopSettings.order[slide].slideOrders) ? JSON.stringify(slideLoopSettings.order[slide].slideOrders[loc % slideLoopSettings.order[slide].slideOrders.length]) : JSON.stringify(slideLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx',locIdxOrder[loc])));
+				$('#slides-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(slideLoopSettings.order[slide].type, locIdxOrder[loc], totalSlides, ((slideLoopSettings.order[slide].repeat.length) ? slideLoopSettings.order[slide].repeat[loc % slideLoopSettings.order[slide].repeat.length] : slideLoopSettings.order[slide].repeat), ((slideLoopSettings.order[slide].slideDelay.length) ? slideLoopSettings.order[slide].slideDelay[loc % slideLoopSettings.order[slide].slideDelay.length] : slideLoopSettings.order[slide].slideDelay), ((slideLoopSettings.order[slide].slideOrders) ? JSON.stringify(slideLoopSettings.order[slide].slideOrders[loc % slideLoopSettings.order[slide].slideOrders.length]) : JSON.stringify(slideLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx',locIdxOrder[loc]), slideLoopSettings.order[slide].loopComplete));
 				totalSlides += 1
 			}
 		}
@@ -1863,7 +1860,7 @@ var mainMap
 					locIdxOrder.push(i)
 				}
 			} else {
-				$('#severe-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(severeLoopSettings.order[slide].type, severeLoopSettings.order[slide].locidx, totalSlides, severeLoopSettings.order[slide].repeat, severeLoopSettings.order[slide].slideDelay, (JSON.stringify(severeLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx',severeLoopSettings.order[slide].locidx)));
+				$('#severe-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(severeLoopSettings.order[slide].type, severeLoopSettings.order[slide].locidx, totalSlides, severeLoopSettings.order[slide].repeat, severeLoopSettings.order[slide].slideDelay, (JSON.stringify(severeLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx',severeLoopSettings.order[slide].locidx), severeLoopSettings.order[slide].loopComplete));
 				totalSlides += 1
 				continue
 			}
@@ -1871,7 +1868,7 @@ var mainMap
 			if (severeLoopSettings.order[slide].locidx.includes('random')) shuffle(locIdxOrder);
 			console.log(locIdxOrder)
 			for (var loc = 0; loc < locIdxOrder.length; loc++) {
-				$('#severe-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(severeLoopSettings.order[slide].type, locIdxOrder[loc], totalSlides, ((severeLoopSettings.order[slide].repeat.length) ? severeLoopSettings.order[slide].repeat[loc % severeLoopSettings.order[slide].repeat.length] : severeLoopSettings.order[slide].repeat), ((severeLoopSettings.order[slide].slideDelay.length) ? severeLoopSettings.order[slide].slideDelay[loc % severeLoopSettings.order[slide].slideDelay.length] : severeLoopSettings.order[slide].slideDelay), ((severeLoopSettings.order[slide].slideOrders) ? JSON.stringify(slideLoopSettings.order[slide].slideOrders[loc % severeLoopSettings.order[slide].slideOrders.length]) : JSON.stringify(severeLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx',locIdxOrder[loc])));
+				$('#severe-header .hscroller').append(((totalSlides > 0) ? arrow : "") + grabDiv(severeLoopSettings.order[slide].type, locIdxOrder[loc], totalSlides, ((severeLoopSettings.order[slide].repeat.length) ? severeLoopSettings.order[slide].repeat[loc % severeLoopSettings.order[slide].repeat.length] : severeLoopSettings.order[slide].repeat), ((severeLoopSettings.order[slide].slideDelay.length) ? severeLoopSettings.order[slide].slideDelay[loc % severeLoopSettings.order[slide].slideDelay.length] : severeLoopSettings.order[slide].slideDelay), ((severeLoopSettings.order[slide].slideOrders) ? JSON.stringify(slideLoopSettings.order[slide].slideOrders[loc % severeLoopSettings.order[slide].slideOrders.length]) : JSON.stringify(severeLoopSettings.order[slide].slideOrder)).replaceAll('replaceLocIdx',locIdxOrder[loc]), severeLoopSettings.order[slide].loopComplete));
 				totalSlides += 1
 			}
 		}
