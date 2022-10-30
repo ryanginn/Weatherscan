@@ -10,7 +10,7 @@ https://opencollective.com/weather-ranch
 ## Stay up to date (Visit the Discord Server):
 https://discord.gg/4TpAsRtsAx
 
-##Installation Instructions:
+## Installation Instructions:
 
 ## Running locally:
 1. Download & Install [node.js LTS](https://nodejs.org/en/)
