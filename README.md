@@ -1,7 +1,7 @@
 # Weatherscan Simulator
 Weatherscan simulation in HTML/JS/CSS
 
-Visit https://weatherscan.net/?long_island for a demo
+Visit https://weatherscan.net/?Philadelphia for a demo
 
 ## Donate:
 If you would like to donate to this project visit here:
