@@ -7,7 +7,12 @@ Visit https://weatherscan.tk/?long_island for a demo
 If you would like to donate to this project visit here:
 https://opencollective.com/weather-ranch 
 
-## Running locally
+## Stay up to date (Visit the Discord Server):
+https://discord.gg/4TpAsRtsAx
+
+##Installation Instructions:
+
+## Running locally:
 1. Download & Install [node.js LTS](https://nodejs.org/en/)
 2. Get weather.com and mapbox.com API keys.
 3. Navigate to `/webroot/js` and open `config.js`.
@@ -16,6 +21,3 @@ https://opencollective.com/weather-ranch
 6. In terminal, run `npm install --production` in the root folder of this project. This will install any dependencies.
 7. In terminal, run `npm start` in the root folder of this project. This will start a local web server.
 8. Follow the link in the console output.
-
-## Development
-Install the simulator like normal.
