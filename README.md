@@ -3,6 +3,10 @@ Weatherscan simulation in HTML/JS/CSS
 
 Visit https://weatherscan.tk/?long_island for a demo
 
+## Donate:
+If you would like to donate to this project visit here:
+https://opencollective.com/weather-ranch 
+
 ## Running locally
 1. Download & Install [node.js LTS](https://nodejs.org/en/)
 2. Get weather.com and mapbox.com API keys.
