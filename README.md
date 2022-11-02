@@ -22,4 +22,4 @@ https://discord.gg/4TpAsRtsAx
 7. In terminal, run `npm start` in the root folder of this project. This will start a local web server.
 8. Follow the link in the console output.
 ### Video Tutorial:
-https://www.youtube.com/watch?v=2oDdpsCEWOU
+[![Weatherscan Emulator Local Install](https://img.youtube.com/vi/2oDdpsCEWOU/0.jpg)](https://www.youtube.com/watch?v=2oDdpsCEWOU)
