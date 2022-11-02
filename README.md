@@ -21,3 +21,5 @@ https://discord.gg/4TpAsRtsAx
 6. In terminal, run `npm install --production` in the root folder of this project. This will install any dependencies.
 7. In terminal, run `npm start` in the root folder of this project. This will start a local web server.
 8. Follow the link in the console output.
+### Video Tutorial:
+https://www.youtube.com/watch?v=2oDdpsCEWOU
