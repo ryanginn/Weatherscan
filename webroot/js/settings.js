@@ -21,7 +21,7 @@ function autocomplete(inp, option) {
     if (!val) { return false;}
     currentFocus = -1;
     arr = [];
-    $.getJSON("https://api.weather.com/v3/location/search?query="+val+"&language=en-US&format=json&apiKey=" + api_key, function(data) {
+    $.getJSON("https://api.weather.com/v3/location/search?query="+val+"&language=en-GB&units=m&format=json&apiKey=" + api_key, function(data) {
       weatherdata = data
       data.location.address.forEach((locaddress, i) => {
         arr.push(locaddress)

@@ -1,15 +1,15 @@
 //Some of the settings may or may not work as this is not a fully completed update. Mainly Appearance settings and weather variables that arent finished.
 //Input API Keys below. If no API is inputted, sim will default to no report.
-var api_key = '';
-var map_key = '';
+var api_key = 'e1f10a1e78da46f5b10a1e78da96f525';
+var map_key = 'pk.eyJ1Ijoid2VhdGhlciIsImEiOiJjaW4wbzllcjkwYWtrd2JsdWl3dG1hZjZ1In0.AdcjoWQiVfvjHfOB0nsyeQ';
 
 //Apperance settings. Fields left blank will use defaults. Will only refresh upon reload.
 var apperanceSettings = {
   iconSet:"2010", //2007 or 2010
   serialNumber:"",// Ex. "TWCS02983932"
   headinID:"", // Ex. "0298393223"
-  affilateName:"Midco",// Ex. "Comcast"
-  logoURL:"", //image size must be 879*184px or similar aspect ratio.
+  affilateName:"MPB Networks",// Ex. "Comcast"
+  logoURL:"https://media.discordapp.net/attachments/1027307434181672970/1139582547047751750/MPB_NETWORKS_2.png", //image size must be 879*184px or similar aspect ratio.
   corebackgroud:"buildings", //forest, mountain, city, buildings, neighborhood, southwest, ocean. Default is buildings.
   backgroudType:"",//Set to
   backgroudURL:"",//If background type set to "custom" will use this url. URL can be a website or local file path.
@@ -92,7 +92,7 @@ var locationSettings = {
     searchQuery:{ //Type and val are required fields for search to work. Will be overridden if location is given in URL.
       type:"",//Leave type blank to use automatic search. "geocode", "state", "district", "city", "locality", "neighborhood", "postal" (zipcode), "address", "poi", "pws" (personal weatherstation) //If geocode is used all otherfields but val will be ignored.
       fuzzy:true, //Attempt approximate search.
-      country:"US", //Two letter country code. //Recommend using "US".
+      country:"IE", //Two letter country code. //Recommend using "US".
       state:"", //Two letter state code.
       val:"", //for geocode "lat,lon"
       searchResultNum:2,//Defaults to 0. Use if the first result for a particular location sucks.
