@@ -418,7 +418,7 @@ function grabCity8SlidesData() {
   citySlideList.forEach((loc, i) => {
     url += `${loc.lat},${loc.lon};`
   });
-  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  url += "&language=en-US&units=m&format=json&apiKey=" + api_key
 
   $.getJSON(url, function(data) {
     data.forEach((ajaxedLoc, i) => {
@@ -438,7 +438,7 @@ function grabTravelData() {
   weatherInfo.travel.cities.forEach((loc, i) => {
     url += `${loc.lat},${loc.lon};`
   });
-  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  url += "&language=en-US&units=m&format=json&apiKey=" + api_key
   $.getJSON(url, function(data) {
     data.forEach((ajaxedLoc, i) => {
       var daycorrection = 0;
@@ -461,7 +461,7 @@ function grabInternationalData() {
   weatherInfo.international.cities.forEach((loc, i) => {
     url += `${loc.lat},${loc.lon};`
   });
-  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  url += "&language=en-US&units=m&format=json&apiKey=" + api_key
   $.getJSON(url, function(data) {
     data.forEach((ajaxedLoc, i) => {
       var daycorrection = 0;
@@ -492,7 +492,7 @@ function grabCitySlidesData() {
   locList.forEach((loc, i) => {
     url += `${loc.lat},${loc.lon};`
   });
-  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  url += "&language=en-US&units=m&format=json&apiKey=" + api_key
 
   $.getJSON(url, function(data) {
     data.forEach((ajaxedLoc, i) => {
@@ -730,7 +730,7 @@ function grabSideandLowerBarData() {
   weatherInfo.bulletin.severewarnings = [];
   var url = "https://api.weather.com/v3/aggcommon/v3alertsHeadlines;v3-wx-forecast-daily-5day;v3-wx-observations-current;v3-wx-forecast-hourly-2day?geocodes="
   url += `${maincitycoords.lat},${maincitycoords.lon};`
-  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  url += "&language=en-US&units=m&format=json&apiKey=" + api_key
 
   $.getJSON(url, function(data) {
         var ajaxedLoc = data[0]
@@ -955,7 +955,7 @@ function grabSideandLowerBarData() {
   });
 }
 function grabalmanacSlidesData() {
-  url = 'https://api.weather.com/v3/aggcommon/v3-wx-almanac-daily-1day;v3-wx-observations-current?geocode=' + maincitycoords.lat + ',' + maincitycoords.lon + "&format=json&language=en-US&units=e" + "&day=" + dateFns.format(new Date(), "D") + "&month=" + dateFns.format(new Date(),"M") + "&apiKey=" + api_key
+  url = 'https://api.weather.com/v3/aggcommon/v3-wx-almanac-daily-1day;v3-wx-observations-current?geocode=' + maincitycoords.lat + ',' + maincitycoords.lon + "&format=json&language=en-US&units=m" + "&day=" + dateFns.format(new Date(), "D") + "&month=" + dateFns.format(new Date(),"M") + "&apiKey=" + api_key
     $.getJSON(url, function(data) {
       if (data == null) {
         weatherInfo.almanac.displayname = maincitycoords.displayname
@@ -1005,7 +1005,7 @@ function grabalmanacSlidesData() {
     }
 }
 function grabHealthData() {
-  $.getJSON('https://api.weather.com/v3/wx/forecast/daily/5day?geocode='+ maincitycoords.lat + ',' + maincitycoords.lon +"&format=json&language=en-US&units=e&apiKey=" + api_key, function(data) {
+  $.getJSON('https://api.weather.com/v3/wx/forecast/daily/5day?geocode='+ maincitycoords.lat + ',' + maincitycoords.lon +"&format=json&language=en-US&units=m&apiKey=" + api_key, function(data) {
     var healthforecastdata = data
     var starthidx = 0;
     var starthidxdayonly = 0;
@@ -1182,7 +1182,7 @@ function grabAirportData() {
   for (var i = 0; i < weatherInfo.airport.mainairports.length; i++) {
     mairporturl += weatherInfo.airport.mainairports[i].iata + ';'
   }
-  mairporturl += '&language=en-US&units=e&format=json&apiKey='+ api_key
+  mairporturl += '&language=en-US&units=m&format=json&apiKey='+ api_key
   //{displayname:"New York / LaGaurdia",iata:"LGA",delay:"No Delay",temp:""}
   $.getJSON(mairporturl, function(data) {
     weatherInfo.ccticker.ccairportdelays = []
@@ -1235,7 +1235,7 @@ function grabAirportData() {
   for (var i = 0; i < weatherInfo.airport.otherairports.length; i++) {
     oairporturl += weatherInfo.airport.otherairports[i].iata + ';'
   }
-  oairporturl += '&language=en-US&units=e&format=json&apiKey='+ api_key
+  oairporturl += '&language=en-US&units=m&format=json&apiKey='+ api_key
   $.getJSON(oairporturl, function(data) {
     data.forEach((airport, i) => {
       var airportdelays = {iato:"",type:"",amount:"",amountmin:0,reason:""};
@@ -1261,9 +1261,9 @@ function pullCCTickerData() {
     ccTickerCitiesList.forEach((loc, i) => {
       ccurl += `${loc.lat},${loc.lon};`
     });
-    ccurl += '&language=en-US&units=e&format=json&apiKey='+ api_key
+    ccurl += '&language=en-US&units=m&format=json&apiKey='+ api_key
   } else {
-    ccurl = 'https://api.weather.com/v3/aggcommon/v3-wx-forecast-daily-5day;v3-wx-observations-current;v3-location-point?geocodes=41.881832,-87.623177;44.986656,-93.258133;33.427204,-111.939896;46.877186,-96.789803;34.187042,-118.381256;33.660057,-117.998970;36.114647,-115.172813;21.315603,-157.858093;28.538336,-81.379234;43.0,-75.0;&language=en-US&units=e&format=json&apiKey='+ api_key
+    ccurl = 'https://api.weather.com/v3/aggcommon/v3-wx-forecast-daily-5day;v3-wx-observations-current;v3-location-point?geocodes=41.881832,-87.623177;44.986656,-93.258133;33.427204,-111.939896;46.877186,-96.789803;34.187042,-118.381256;33.660057,-117.998970;36.114647,-115.172813;21.315603,-157.858093;28.538336,-81.379234;43.0,-75.0;&language=en-US&units=m&format=json&apiKey='+ api_key
   }
   weatherInfo.ccticker.ccLocs = [];
   $.getJSON(ccurl, function(data) {
